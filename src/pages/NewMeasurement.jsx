@@ -189,34 +189,30 @@ export default function NewMeasurement() {
       status: "submitted",
     });
 
-    // Send email notification
-    const itemsTable = filledItems.map(i =>
-      `#${i.item} | ${i.mark || '-'} | ${i.series} | ${i.config || '-'} | ${i.width}"×${i.height}" | Qty:${i.qty} | ${i.sqft} ft²`
-    ).join('\n');
-
-    await base44.integrations.Core.SendEmail({
-      to: "alex@wdximpact.com",
-      subject: `WDX Measurement — ${form.clientName} — ${totalSqft.toFixed(2)} ft²`,
-      body: `
-New field measurement submitted:
-
-Client: ${form.clientName}
-Address: ${form.address}, ${form.city} ${form.zip}
-Technician: ${form.techName}
-Date: ${form.date}
-Permitted: ${form.permitted}
-Glass: ${form.glassColor}
-Frame: ${form.frameColor}
-Low-E: ${form.loweCoating}
-${form.jobNotes ? `Notes: ${form.jobNotes}` : ''}
-
-Total: ${totalSqft.toFixed(2)} ft²
-
-LINE ITEMS:
-${itemsTable}
-      `.trim(),
-      from_name: "WDX Field Measurements",
+    // Send via Resend backend function
+    const emailRes = await base44.functions.invoke('sendMeasurement', {
+      jobInfo: {
+        clientName: form.clientName,
+        address: form.address,
+        city: form.city,
+        zip: form.zip,
+        techName: form.techName,
+        date: form.date,
+        permitted: form.permitted,
+        glassColor: form.glassColor,
+        frameColor: form.frameColor,
+        loweCoating: form.loweCoating,
+        jobNotes: form.jobNotes,
+      },
+      lineItems: filledItems,
+      totalSqft: totalSqft.toFixed(2),
     });
+
+    if (!emailRes.data?.success) {
+      setSending(false);
+      toast.error("Email failed: " + (emailRes.data?.error || "Unknown error"));
+      return;
+    }
 
     // Clear draft
     if (draftId) {
