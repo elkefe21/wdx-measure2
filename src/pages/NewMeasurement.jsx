@@ -11,7 +11,7 @@ import ToggleGroup from "@/components/wdx/ToggleGroup";
 import LineItem from "@/components/wdx/LineItem";
 import { GLASS_COLORS, FRAME_COLORS, LOWE_COATINGS } from "@/components/wdx/constants";
 
-const emptyItem = () => ({ mark: "", series: "", config: "", width: "", height: "", qty: 1, notes: "" });
+const emptyItem = () => ({ mark: "", series: "", config: "", width: "", height: "", qty: "1", notes: "" });
 
 export default function NewMeasurement() {
   const navigate = useNavigate();
