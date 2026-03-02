@@ -222,8 +222,7 @@ export default function NewMeasurement() {
     }
 
     setSending(false);
-    toast.success("Sent to alex@wdximpact.com!");
-    navigate(createPageUrl("Home"));
+    setSubmitted({ clientName: form.clientName, totalSqft });
   };
 
   const inputClass = "w-full bg-[#faf9f7] border-[1.5px] border-[#ddd] rounded-[10px] text-[#1a1a1a] font-sans text-[15px] py-3 px-3.5 outline-none transition-all focus:border-[#e86c2f] focus:shadow-[0_0_0_3px_rgba(232,108,47,0.1)]";
