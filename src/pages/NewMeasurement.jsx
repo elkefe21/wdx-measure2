@@ -160,69 +160,75 @@ export default function NewMeasurement() {
     setShowConfirm(false);
     setSending(true);
 
-    const filledItems = lineItems
-      .filter(i => i.series || i.width || i.height)
-      .map((item, idx) => {
-        const w = parseFloat(item.width) || 0;
-        const h = parseFloat(item.height) || 0;
-        const q = parseFloat(item.qty) || 1;
-        return {
-          ...item,
-          item: idx + 1,
-          sqft: ((w * h / 144) * q).toFixed(2),
-        };
-      });
+    try {
+      const filledItems = lineItems
+        .filter(i => i.series || i.width || i.height)
+        .map((item, idx) => {
+          const w = parseFloat(item.width) || 0;
+          const h = parseFloat(item.height) || 0;
+          const q = parseFloat(item.qty) || 1;
+          return {
+            ...item,
+            item: idx + 1,
+            sqft: ((w * h / 144) * q).toFixed(2),
+          };
+        });
 
-    // Save as submission
-    await base44.entities.Measurement.create({
-      permitted: form.permitted,
-      tech_name: form.techName,
-      date: form.date,
-      client_name: form.clientName,
-      address: form.address,
-      city: form.city,
-      zip: form.zip,
-      glass_color: form.glassColor,
-      frame_color: form.frameColor,
-      lowe_coating: form.loweCoating,
-      job_notes: form.jobNotes,
-      line_items: filledItems,
-      total_sqft: totalSqft,
-      status: "submitted",
-    });
-
-    // Send via Resend backend function
-    const emailRes = await base44.functions.invoke('sendMeasurement', {
-      jobInfo: {
-        clientName: form.clientName,
+      // Save as submission
+      await base44.entities.Measurement.create({
+        permitted: form.permitted,
+        tech_name: form.techName,
+        date: form.date,
+        client_name: form.clientName,
         address: form.address,
         city: form.city,
         zip: form.zip,
-        techName: form.techName,
-        date: form.date,
-        permitted: form.permitted,
-        glassColor: form.glassColor,
-        frameColor: form.frameColor,
-        loweCoating: form.loweCoating,
-        jobNotes: form.jobNotes,
-      },
-      lineItems: filledItems,
-      totalSqft: totalSqft.toFixed(2),
-    });
+        glass_color: form.glassColor,
+        frame_color: form.frameColor,
+        lowe_coating: form.loweCoating,
+        job_notes: form.jobNotes,
+        line_items: filledItems,
+        total_sqft: totalSqft,
+        status: "submitted",
+      });
 
-    if (!emailRes.data?.success) {
+      // Send via Resend backend function
+      const emailRes = await base44.functions.invoke('sendMeasurement', {
+        jobInfo: {
+          clientName: form.clientName,
+          address: form.address,
+          city: form.city,
+          zip: form.zip,
+          techName: form.techName,
+          date: form.date,
+          permitted: form.permitted,
+          glassColor: form.glassColor,
+          frameColor: form.frameColor,
+          loweCoating: form.loweCoating,
+          jobNotes: form.jobNotes,
+        },
+        lineItems: filledItems,
+        totalSqft: totalSqft.toFixed(2),
+      });
+
+      if (!emailRes.data?.success) {
+        toast.error("Email failed: " + (emailRes.data?.error || "Unknown error"));
+        setSending(false);
+        return;
+      }
+
+      // Clear draft
+      if (draftId) {
+        await base44.entities.Draft.delete(draftId);
+      }
+
       setSending(false);
-      toast.error("Email failed: " + (emailRes.data?.error || "Unknown error"));
-      return;
+      setSubmitted({ clientName: form.clientName, totalSqft });
+    } catch (err) {
+      console.error("Submit error:", err);
+      toast.error("Something went wrong: " + err.message);
+      setSending(false);
     }
-
-    // Clear draft
-    if (draftId) {
-      await base44.entities.Draft.delete(draftId);
-    }
-
-    setSending(false);
-    setSubmitted({ clientName: form.clientName, totalSqft });
   };
 
   const inputClass = "w-full bg-[#faf9f7] border-[1.5px] border-[#ddd] rounded-[10px] text-[#1a1a1a] font-sans text-[15px] py-3 px-3.5 outline-none transition-all focus:border-[#e86c2f] focus:shadow-[0_0_0_3px_rgba(232,108,47,0.1)]";
