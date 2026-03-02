@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #f4f2ee;
+  --card: #ffffff;
+  --border: #e8e4de;
+  --border-accent: rgba(232,108,47,0.25);
+  --teal: #e86c2f;
+  --teal-dark: #c9561f;
+  --teal-glow: rgba(232,108,47,0.10);
+  --gold: #e8a020;
+  --text: #1a1a1a;
+  --muted: #888880;
+  --red: #dc3545;
+  --input-bg: #faf9f7;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide number input spinners */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+input[type=number] { -moz-appearance: textfield; }
