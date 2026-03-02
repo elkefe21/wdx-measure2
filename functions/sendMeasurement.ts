@@ -158,8 +158,7 @@ Deno.serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'WDX Field Measurements <onboarding@resend.dev>',
-        reply_to: 'alex@wdximpact.com',
+        from: 'WDX Field Measurements <measurements@wdximpact.com>',
         to: ['alex@wdximpact.com'],
         subject: `WDX Measure Form — ${jobInfo.clientName} — ${parseFloat(totalSqft).toFixed(2)} ft²`,
         html: htmlBody,
