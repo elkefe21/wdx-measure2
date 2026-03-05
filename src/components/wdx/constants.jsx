@@ -58,3 +58,14 @@ export const FRAME_COLORS = [
 ];
 
 export const LOWE_COATINGS = ['NONE', 'CLIMA GUARD 62/27', 'SB70', 'SB60'];
+
+// Series that show window option checkboxes (Privacy + Flush Adapter)
+export const WINDOW_OPTION_SERIES = [
+  'MG200 (SH)', 'MG300 (HR)', 'MG400 (PW)', 'MG450 (PW)', 'MG600 (CA)',
+  'MG350 (HR)', 'MG350 (SH)', 'MG350 (PW)',
+];
+
+// Series that show door option checkboxes (Privacy + LH + RH)
+export const DOOR_OPTION_SERIES = [
+  'MG3000 (FD)', 'MG3500 (FD)', 'MG4000 (Pivot Door)',
+];
