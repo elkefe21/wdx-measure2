@@ -302,7 +302,7 @@ export default function NewMeasurement() {
     <div>
       {/* Header sqft badge */}
       <div className="flex items-center justify-between mb-5">
-        <h1 className="font-syne text-xl font-extrabold text-[#1a1a1a]">New Measurement</h1>
+        <h1 className="font-syne text-xl font-extrabold text-[#1a1a1a]">{editId ? "Edit Measurement" : "New Measurement"}</h1>
         <div className="bg-[rgba(232,108,47,0.08)] border border-[rgba(232,108,47,0.25)] rounded-[10px] px-3.5 py-2 text-right">
           <div className="font-mono text-[9px] text-[#888880] uppercase tracking-wider">Total SqFt</div>
           <div className="font-syne text-xl font-bold text-[#e86c2f]">
