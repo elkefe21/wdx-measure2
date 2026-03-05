@@ -55,12 +55,17 @@ export default function NewMeasurement() {
     }, 0);
   }, [lineItems]);
 
-  // Load draft if URL has ?draft=id
+  const [editId, setEditId] = useState(null); // ID of submission being edited
+
+  // Load draft or edit target from URL
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const id = params.get("draft");
-    if (id) {
-      loadDraft(id);
+    const draftParam = params.get("draft");
+    const editParam = params.get("edit");
+    if (draftParam) {
+      loadDraft(draftParam);
+    } else if (editParam) {
+      loadForEdit(editParam);
     }
   }, []);
 
