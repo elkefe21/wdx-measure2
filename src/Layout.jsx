@@ -17,7 +17,12 @@ export default function Layout({ children, currentPageName }) {
           base44.auth.redirectToLogin();
           return;
         }
-        const u = await base44.auth.me();
+        let u = await base44.auth.me();
+        // If user has no full_name, set it to their email so it appears as tech name
+        if (u && !u.full_name) {
+          await base44.auth.updateMe({ full_name: u.email });
+          u = await base44.auth.me();
+        }
         setUser(u);
         setAuthChecked(true);
       } catch (e) {
