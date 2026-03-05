@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { X } from "lucide-react";
-import { MR_GLASS_SERIES, SERIES_CONFIGS } from "./constants";
+import { MR_GLASS_SERIES, SERIES_CONFIGS, WINDOW_OPTION_SERIES, DOOR_OPTION_SERIES } from "./constants";
 
 export default function LineItem({ item, index, onChange, onRemove }) {
   const configs = useMemo(() => {
