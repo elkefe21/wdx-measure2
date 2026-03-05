@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import { X } from "lucide-react";
-import Stepper from "./Stepper";
 import { MR_GLASS_SERIES, SERIES_CONFIGS } from "./constants";
 
 export default function LineItem({ item, index, onChange, onRemove }) {
