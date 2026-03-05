@@ -12,13 +12,13 @@ export default function Layout({ children, currentPageName }) {
   useEffect(() => {
     base44.auth.me().then(u => {
       if (!u) {
-        base44.auth.redirectToLogin(window.location.href);
+        base44.auth.redirectToLogin();
         return;
       }
       setUser(u);
       setAuthChecked(true);
     }).catch(() => {
-      base44.auth.redirectToLogin(window.location.href);
+      base44.auth.redirectToLogin();
     });
   }, []);
 
