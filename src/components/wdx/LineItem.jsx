@@ -75,15 +75,37 @@ export default function LineItem({ item, index, onChange, onRemove }) {
       <div className="grid grid-cols-3 gap-2.5 mb-2.5">
         <div>
           <label className="block text-[11px] font-medium text-[#888880] uppercase tracking-wider mb-1.5">Width (in)</label>
-          <Stepper value={item.width} onChange={v => update("width", v)} step={0.25} />
+          <input
+            type="number"
+            inputMode="decimal"
+            value={item.width || ""}
+            onChange={e => update("width", e.target.value)}
+            placeholder="0.00"
+            className="w-full bg-[#faf9f7] border-[1.5px] border-[#ddd] rounded-[10px] text-[#1a1a1a] font-mono text-[15px] py-3 px-3 outline-none transition-all focus:border-[#e86c2f] focus:shadow-[0_0_0_3px_rgba(232,108,47,0.1)] text-center"
+          />
         </div>
         <div>
           <label className="block text-[11px] font-medium text-[#888880] uppercase tracking-wider mb-1.5">Height (in)</label>
-          <Stepper value={item.height} onChange={v => update("height", v)} step={0.25} />
+          <input
+            type="number"
+            inputMode="decimal"
+            value={item.height || ""}
+            onChange={e => update("height", e.target.value)}
+            placeholder="0.00"
+            className="w-full bg-[#faf9f7] border-[1.5px] border-[#ddd] rounded-[10px] text-[#1a1a1a] font-mono text-[15px] py-3 px-3 outline-none transition-all focus:border-[#e86c2f] focus:shadow-[0_0_0_3px_rgba(232,108,47,0.1)] text-center"
+          />
         </div>
         <div>
           <label className="block text-[11px] font-medium text-[#888880] uppercase tracking-wider mb-1.5">Qty</label>
-          <Stepper value={item.qty || 1} onChange={v => update("qty", v)} min={1} step={1} inputMode="numeric" placeholder="1" />
+          <input
+            type="number"
+            inputMode="numeric"
+            value={item.qty || ""}
+            onChange={e => update("qty", e.target.value)}
+            placeholder="1"
+            min="1"
+            className="w-full bg-[#faf9f7] border-[1.5px] border-[#ddd] rounded-[10px] text-[#1a1a1a] font-mono text-[15px] py-3 px-3 outline-none transition-all focus:border-[#e86c2f] focus:shadow-[0_0_0_3px_rgba(232,108,47,0.1)] text-center"
+          />
         </div>
       </div>
 
