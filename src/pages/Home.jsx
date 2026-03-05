@@ -26,12 +26,12 @@ export default function Home() {
 
   const { data: drafts = [], isLoading: draftsLoading } = useQuery({
     queryKey: ["drafts"],
-    queryFn: () => base44.entities.Draft.list("-updated_date", 1),
+    queryFn: () => base44.entities.Draft.list("-updated_date", 1).then(r => Array.isArray(r) ? r : []),
   });
 
   const { data: submissions = [], isLoading: subsLoading } = useQuery({
     queryKey: ["submissions"],
-    queryFn: () => base44.entities.Measurement.list("-created_date", 50),
+    queryFn: () => base44.entities.Measurement.list("-created_date", 50).then(r => Array.isArray(r) ? r : []),
   });
 
   const draft = drafts[0];
@@ -62,11 +62,9 @@ export default function Home() {
 
   return (
     <div>
-      {/* Greeting */}
       <h1 className="font-syne text-2xl font-extrabold text-[#1a1a1a] mb-1">{getGreeting()}</h1>
       <p className="text-[14px] text-[#888880] mb-7">Ready to measure?</p>
 
-      {/* New Measurement Button */}
       <Link
         to={createPageUrl("NewMeasurement")}
         className="flex items-center justify-center gap-2.5 w-full py-[18px] bg-gradient-to-br from-[#e86c2f] to-[#d05a20] rounded-2xl text-white font-syne text-base font-extrabold tracking-wide shadow-[0_4px_20px_rgba(232,108,47,0.35)] hover:translate-y-[-2px] hover:shadow-[0_8px_28px_rgba(232,108,47,0.40)] active:translate-y-0 transition-all no-underline mb-6"
@@ -75,7 +73,6 @@ export default function Home() {
         New Measurement
       </Link>
 
-      {/* Draft Section */}
       <div className="font-syne text-[11px] font-bold text-[#e86c2f] uppercase tracking-[0.18em] mb-3.5 flex items-center gap-2 after:content-[''] after:flex-1 after:h-px after:bg-[rgba(232,108,47,0.25)]">
         Saved Draft
       </div>
@@ -139,7 +136,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* Submitted Jobs */}
       <div className="font-syne text-[11px] font-bold text-[#e86c2f] uppercase tracking-[0.18em] mb-3.5 flex items-center gap-2 after:content-[''] after:flex-1 after:h-px after:bg-[rgba(232,108,47,0.25)]">
         Submitted Jobs
       </div>
@@ -166,7 +162,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* Detail modal */}
       {selectedSubmission && (
         <SubmissionDetail
           submission={selectedSubmission}
