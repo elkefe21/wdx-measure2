@@ -20,6 +20,14 @@ export default function NewMeasurement() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [submitted, setSubmitted] = useState(null); // { clientName, totalSqft }
   const saveTimerRef = useRef(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    base44.auth.me().then(u => {
+      setUser(u);
+      setForm(prev => ({ ...prev, techName: u?.full_name || "" }));
+    }).catch(() => {});
+  }, []);
 
   const [form, setForm] = useState({
     permitted: "",
