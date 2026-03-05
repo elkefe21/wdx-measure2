@@ -126,6 +126,46 @@ export default function LineItem({ item, index, onChange, onRemove }) {
         </div>
       )}
 
+      {/* Window Options */}
+      {item.config && WINDOW_OPTION_SERIES.includes(item.series) && (
+        <div className="mb-2.5 flex gap-4">
+          {["Privacy", "Flush Adapter (no flange)"].map(opt => {
+            const key = `opt_${opt}`;
+            return (
+              <label key={opt} className="flex items-center gap-1.5 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={!!item[key]}
+                  onChange={e => update(key, e.target.checked)}
+                  className="w-4 h-4 accent-[#e86c2f] cursor-pointer"
+                />
+                <span className="text-[12px] text-[#1a1a1a] font-sans">{opt}</span>
+              </label>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Door Options */}
+      {item.config && DOOR_OPTION_SERIES.includes(item.series) && (
+        <div className="mb-2.5 flex gap-4">
+          {["Privacy", "LH", "RH"].map(opt => {
+            const key = `opt_${opt}`;
+            return (
+              <label key={opt} className="flex items-center gap-1.5 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={!!item[key]}
+                  onChange={e => update(key, e.target.checked)}
+                  className="w-4 h-4 accent-[#e86c2f] cursor-pointer"
+                />
+                <span className="text-[12px] text-[#1a1a1a] font-sans">{opt}</span>
+              </label>
+            );
+          })}
+        </div>
+      )}
+
       {/* Notes */}
       <div>
         <label className="block text-[11px] font-medium text-[#888880] uppercase tracking-wider mb-1.5">Notes</label>
