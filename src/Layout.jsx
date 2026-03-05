@@ -10,19 +10,23 @@ export default function Layout({ children, currentPageName }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    base44.auth.isAuthenticated().then(isAuth => {
-      if (!isAuth) {
-        base44.auth.redirectToLogin();
-        return;
+    const checkAuth = async () => {
+      try {
+        const isAuth = await base44.auth.isAuthenticated();
+        if (!isAuth) {
+          base44.auth.redirectToLogin();
+          return;
+        }
+        const u = await base44.auth.me();
+        setUser(u);
+        setAuthChecked(true);
+      } catch (e) {
+        // Don't redirect to login on errors - just show loading to avoid loops
+        console.error("Auth check error:", e);
+        setAuthChecked(true);
       }
-      return base44.auth.me();
-    }).then(u => {
-      if (!u) return;
-      setUser(u);
-      setAuthChecked(true);
-    }).catch(() => {
-      base44.auth.redirectToLogin();
-    });
+    };
+    checkAuth();
   }, []);
 
   // Block ALL page rendering until auth is confirmed
