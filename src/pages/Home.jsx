@@ -27,11 +27,13 @@ export default function Home() {
   const { data: drafts = [], isLoading: draftsLoading } = useQuery({
     queryKey: ["drafts"],
     queryFn: () => base44.entities.Draft.list("-updated_date", 1).then(r => Array.isArray(r) ? r : []),
+    enabled: !!user,
   });
 
   const { data: submissions = [], isLoading: subsLoading } = useQuery({
     queryKey: ["submissions"],
     queryFn: () => base44.entities.Measurement.list("-created_date", 50).then(r => Array.isArray(r) ? r : []),
+    enabled: !!user,
   });
 
   const draft = drafts[0];
