@@ -69,6 +69,37 @@ export default function NewMeasurement() {
     }
   }, []);
 
+  const loadForEdit = async (id) => {
+    const measurement = await base44.entities.Measurement.get(id);
+    if (!measurement) return;
+    setEditId(id);
+    setForm({
+      permitted: measurement.permitted || "",
+      techName: measurement.tech_name || "",
+      date: measurement.date || new Date().toISOString().split("T")[0],
+      clientName: measurement.client_name || "",
+      address: measurement.address || "",
+      city: measurement.city || "",
+      zip: measurement.zip || "",
+      glassColor: measurement.glass_color || "",
+      frameColor: measurement.frame_color || "",
+      loweCoating: measurement.lowe_coating || "NONE",
+      jobNotes: measurement.job_notes || "",
+    });
+    if (measurement.line_items?.length > 0) {
+      setLineItems(measurement.line_items.map(i => ({
+        mark: i.mark || "",
+        series: i.series || "",
+        config: i.config || "",
+        width: i.width || "",
+        height: i.height || "",
+        qty: i.qty || "1",
+        notes: i.notes || "",
+      })));
+    }
+    toast.success("Job loaded for editing");
+  };
+
   const loadDraft = async (id) => {
     const drafts = await base44.entities.Draft.list("-updated_date", 1);
     const draft = drafts.find(d => d.id === id) || drafts[0];
