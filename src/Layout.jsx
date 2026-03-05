@@ -6,11 +6,34 @@ import { Home, Ruler, LogOut, Menu, X } from "lucide-react";
 
 export default function Layout({ children, currentPageName }) {
   const [user, setUser] = useState(null);
+  const [authChecked, setAuthChecked] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    base44.auth.me().then(setUser).catch(() => {});
+    base44.auth.me().then(u => {
+      if (!u) {
+        base44.auth.redirectToLogin(window.location.href);
+        return;
+      }
+      setUser(u);
+      setAuthChecked(true);
+    }).catch(() => {
+      base44.auth.redirectToLogin(window.location.href);
+    });
   }, []);
+
+  // Block ALL page rendering until auth is confirmed
+  if (!authChecked) {
+    return (
+      <div className="fixed inset-0 bg-[#f4f2ee] flex flex-col items-center justify-center gap-4">
+        <div style={{ width: 44, height: 44, border: "3px solid rgba(232,108,47,0.2)", borderTopColor: "#e86c2f", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+        <div style={{ fontFamily: "sans-serif", fontSize: 13, fontWeight: 700, color: "#e86c2f", letterSpacing: "0.05em" }}>
+          Loading WDX...
+        </div>
+      </div>
+    );
+  }
 
   const navItems = [
     { name: "Home", icon: Home, page: "Home" },
@@ -50,8 +73,8 @@ export default function Layout({ children, currentPageName }) {
                 key={item.page}
                 to={createPageUrl(item.page)}
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all no-underline ${
-                  currentPageName === item.page 
-                    ? "bg-[rgba(232,108,47,0.1)] text-[#e86c2f] border border-[rgba(232,108,47,0.25)]" 
+                  currentPageName === item.page
+                    ? "bg-[rgba(232,108,47,0.1)] text-[#e86c2f] border border-[rgba(232,108,47,0.25)]"
                     : "text-[#888880] hover:text-[#e86c2f] hover:bg-[rgba(232,108,47,0.05)]"
                 }`}
               >
@@ -60,7 +83,7 @@ export default function Layout({ children, currentPageName }) {
               </Link>
             ))}
             <button
-              onClick={() => base44.auth.logout()}
+              onClick={() => base44.auth.logout(window.location.href)}
               className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs text-[#888880] border border-[#e0dbd4] bg-[#f4f2ee] hover:text-[#e86c2f] hover:border-[#e86c2f] transition-all cursor-pointer font-sans"
             >
               <LogOut className="w-3.5 h-3.5" />
@@ -79,8 +102,8 @@ export default function Layout({ children, currentPageName }) {
               to={createPageUrl(item.page)}
               onClick={() => setMenuOpen(false)}
               className={`flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium no-underline ${
-                currentPageName === item.page 
-                  ? "bg-[rgba(232,108,47,0.1)] text-[#e86c2f]" 
+                currentPageName === item.page
+                  ? "bg-[rgba(232,108,47,0.1)] text-[#e86c2f]"
                   : "text-[#888880]"
               }`}
             >
@@ -89,7 +112,7 @@ export default function Layout({ children, currentPageName }) {
             </Link>
           ))}
           <button
-            onClick={() => base44.auth.logout()}
+            onClick={() => base44.auth.logout(window.location.href)}
             className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-[#888880] hover:text-[#e86c2f] transition-all cursor-pointer font-sans text-left"
           >
             <LogOut className="w-4 h-4" />
