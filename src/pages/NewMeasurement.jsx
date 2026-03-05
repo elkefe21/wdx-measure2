@@ -218,8 +218,8 @@ export default function NewMeasurement() {
           };
         });
 
-      // Save as submission
-      await base44.entities.Measurement.create({
+      // Save as submission (create or update)
+      const measurementData = {
         permitted: form.permitted,
         tech_name: form.techName,
         date: form.date,
@@ -234,7 +234,12 @@ export default function NewMeasurement() {
         line_items: filledItems,
         total_sqft: totalSqft,
         status: "submitted",
-      });
+      };
+      if (editId) {
+        await base44.entities.Measurement.update(editId, measurementData);
+      } else {
+        await base44.entities.Measurement.create(measurementData);
+      }
 
       // Send email + create Monday.com entries
       const submitRes = await base44.functions.invoke('onMeasurementSubmitted', {
