@@ -282,7 +282,7 @@ export default function NewMeasurement() {
 
         <div className="grid grid-cols-2 gap-2.5">
           <FieldGroup label="Technician Name" required>
-            <input type="text" value={form.techName} onChange={e => updateForm("techName", e.target.value)} placeholder="Full name" className={inputClass} />
+            <input type="text" value={form.techName} readOnly className={`${inputClass} opacity-70 cursor-default`} />
           </FieldGroup>
           <FieldGroup label="Date" required>
             <input type="date" value={form.date} onChange={e => updateForm("date", e.target.value)} className={inputClass} />
