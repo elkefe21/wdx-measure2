@@ -200,8 +200,8 @@ export default function NewMeasurement() {
         status: "submitted",
       });
 
-      // Send via Resend backend function
-      const emailRes = await base44.functions.invoke('sendMeasurement', {
+      // Send email + create Monday.com entries
+      const submitRes = await base44.functions.invoke('onMeasurementSubmitted', {
         jobInfo: {
           clientName: form.clientName,
           address: form.address,
@@ -219,8 +219,8 @@ export default function NewMeasurement() {
         totalSqft: totalSqft.toFixed(2),
       });
 
-      if (!emailRes.data?.success) {
-        toast.error("Email failed: " + (emailRes.data?.error || "Unknown error"));
+      if (!submitRes.data?.success) {
+        toast.error("Submission failed: " + (submitRes.data?.error || "Unknown error"));
         setSending(false);
         return;
       }
