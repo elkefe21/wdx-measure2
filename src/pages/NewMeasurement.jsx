@@ -460,7 +460,7 @@ export default function NewMeasurement() {
                 onClick={confirmSend}
                 className="flex-[2] py-4 bg-[#e86c2f] border-none rounded-xl text-white font-syne text-[15px] font-extrabold cursor-pointer hover:bg-[#c9561f] transition-all"
               >
-                Send Now →
+                {editId ? "Update & Resend →" : "Send Now →"}
               </button>
             </div>
           </div>
