@@ -28,8 +28,22 @@ Deno.serve(async (req) => {
       ['Job Notes', jobInfo.jobNotes || ''],
       ['Total SqFt', totalSqft],
       [],
-      ['#', 'Mark', 'Series', 'Config', 'Width (in)', 'Height (in)', 'Qty', 'SqFt', 'Notes'],
-      ...lineItems.map(i => [i.item, i.mark || '', i.series, i.config || '', i.width, i.height, i.qty, i.sqft, i.notes || '']),
+      ['#', 'Mark', 'Series', 'Config', 'Width (in)', 'Height (in)', 'Qty', 'SqFt', 'Privacy', 'Flush Adapter', 'LH', 'RH', 'Notes'],
+      ...lineItems.map(i => [
+        i.item,
+        i.mark || '',
+        i.series || '',
+        i.config || '',
+        i.width || '',
+        i.height || '',
+        i.qty || '',
+        i.sqft || '',
+        i['opt_Privacy'] ? 'Yes' : '',
+        i['opt_Flush Adapter (no flange)'] ? 'Yes' : '',
+        i['opt_LH'] ? 'Yes' : '',
+        i['opt_RH'] ? 'Yes' : '',
+        i.notes || '',
+      ]),
     ];
     const csvContent = csvRows
       .map(row => row.map(cell => `"${String(cell ?? '').replace(/"/g, '""')}"`).join(','))
