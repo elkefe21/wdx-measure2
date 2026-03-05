@@ -10,13 +10,9 @@ Deno.serve(async (req) => {
 
     const query = `
       query {
-        boards(ids: [5621135120, 18401968020]) {
+        boards(ids: [5621135120]) {
           id
           name
-          groups {
-            id
-            title
-          }
           columns {
             id
             title
