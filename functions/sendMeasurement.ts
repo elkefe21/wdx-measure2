@@ -38,7 +38,15 @@ Deno.serve(async (req) => {
     const csvBase64 = btoa(unescape(encodeURIComponent(csvContent)));
 
     // ── Generate HTML email (Jotform-style) ──────────────────────────────────
-    const itemRows = lineItems.map((i, idx) => `
+    const itemRows = lineItems.map((i, idx) => {
+      const optionKeys = [
+        { key: 'opt_Privacy', label: 'Privacy' },
+        { key: 'opt_Flush Adapter (no flange)', label: 'Flush Adapter' },
+        { key: 'opt_LH', label: 'LH' },
+        { key: 'opt_RH', label: 'RH' },
+      ];
+      const checkedOpts = optionKeys.filter(o => i[o.key]).map(o => `<div style="color:#e86c2f;font-size:12px">&#10003; ${o.label}</div>`).join('');
+      return `
       <tr style="background:${idx % 2 === 0 ? '#ffffff' : '#f9f7f5'}">
         <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px;text-align:center">${i.item}</td>
         <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px">${i.mark || '—'}</td>
@@ -48,9 +56,10 @@ Deno.serve(async (req) => {
         <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px;text-align:center">${i.height || '—'}"</td>
         <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px;text-align:center">${i.qty}</td>
         <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#e86c2f;font-size:13px;font-weight:600;text-align:center">${i.sqft} ft²</td>
+        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;font-size:12px">${checkedOpts || '<span style="color:#ccc">—</span>'}</td>
         ${i.notes ? `<td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#888880;font-size:12px">${i.notes}</td>` : '<td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#ccc;font-size:13px">—</td>'}
       </tr>
-    `).join('');
+    `}).join('');
 
     const field = (label, value) => `
       <tr>
