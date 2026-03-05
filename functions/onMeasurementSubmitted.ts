@@ -61,8 +61,14 @@ async function createProposalItem(jobInfo, totalSqft, apiKey) {
 
   const columnValues = JSON.stringify({
     text_mkst15hn: jobInfo.clientName,
-    location_mkstw7gc: { address: address, lat: null, lng: null },
-  }).replace(/"/g, '\\"');
+    location_mkstw7gc: { address: address },
+    date4: { date: jobInfo.date || new Date().toISOString().split('T')[0] },
+    color_mkyq8ptw: { label: jobInfo.permitted === 'Yes' ? 'Yes' : 'No' },
+    numeric_mksxvz55: parseFloat(totalSqft) || 0,
+    text: jobInfo.jobNotes || '',
+  });
+
+  const escaped = columnValues.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
 
   const query = `
     mutation {
@@ -70,7 +76,7 @@ async function createProposalItem(jobInfo, totalSqft, apiKey) {
         board_id: ${PROPOSALS_BOARD},
         group_id: "${PROPOSAL_SENT_GROUP}",
         item_name: "${itemName.replace(/"/g, '\\"')}",
-        column_values: "${columnValues}"
+        column_values: "${escaped}"
       ) { id }
     }
   `;
