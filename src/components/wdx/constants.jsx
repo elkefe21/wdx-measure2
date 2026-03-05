@@ -24,8 +24,8 @@ export const MR_GLASS_SERIES = [
 ];
 
 export const SERIES_CONFIGS = {
-  'MG200 (SH)': ['OX'],
-  'MG350 (SH)': ['OX'],
+  'MG200 (SH)': ['OX Equal', 'OX Unequal (Oriel)'],
+  'MG350 (SH)': ['OX Equal', 'OX Unequal (Oriel)'],
   'MG300 (HR)': ['XO', 'OX', 'XOX [1/3][1/3][1/3]', 'XOX [1/4][1/2][1/4]'],
   'MG350 (HR)': ['XO', 'OX', 'XOX [1/3][1/3][1/3]', 'XOX [1/4][1/2][1/4]'],
   'MG400 (PW)': ['RECTANGLE', 'ARCH WITH LEGS', 'HALF CIRCLE', 'EYEBROW', 'CIRCLE', 'TRAPEZOID', 'TRIANGLE', 'OVAL', 'OCTAGON', 'HALF ARC LEG', 'HALF EYEBROW'],
