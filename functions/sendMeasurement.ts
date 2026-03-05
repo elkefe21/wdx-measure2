@@ -124,6 +124,7 @@ Deno.serve(async (req) => {
               <th style="padding:10px 12px;text-align:center;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;letter-spacing:0.08em">H</th>
               <th style="padding:10px 12px;text-align:center;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;letter-spacing:0.08em">Qty</th>
               <th style="padding:10px 12px;text-align:center;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;letter-spacing:0.08em">ft²</th>
+              <th style="padding:10px 12px;text-align:left;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;letter-spacing:0.08em">Options</th>
               <th style="padding:10px 12px;text-align:left;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;letter-spacing:0.08em">Notes</th>
             </tr>
           </thead>
