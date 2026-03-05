@@ -440,7 +440,8 @@ export default function NewMeasurement() {
           <div className="bg-white border border-[#e8e4de] rounded-[20px] p-7 w-full max-w-[420px]">
             <h2 className="font-syne text-xl font-extrabold mb-2">Send Measurements</h2>
             <p className="text-[14px] text-[#888880] mb-4 leading-relaxed">
-              This will email the measurement sheet to <strong className="text-[#e86c2f]">alex@wdximpact.com</strong>. Make sure all required fields are filled.
+              {editId ? "This will update the existing job and resend the measurement sheet to " : "This will email the measurement sheet to "}
+              <strong className="text-[#e86c2f]">alex@wdximpact.com</strong>. Make sure all required fields are filled.
             </p>
             <div className="font-mono text-[12px] text-[#e8a020] mb-4 p-3 bg-[rgba(240,165,0,0.08)] rounded-[10px] border border-[rgba(240,165,0,0.2)]">
               <div>Client: <strong>{form.clientName}</strong></div>
