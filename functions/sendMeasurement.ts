@@ -69,12 +69,12 @@ Deno.serve(async (req) => {
   <div style="max-width:680px;margin:30px auto;background:#f4f2ee;padding:0 16px 40px">
 
     <!-- Header -->
-    <div style="background:linear-gradient(135deg,#e86c2f,#c9561f);border-radius:16px 16px 0 0;padding:28px 32px;text-align:center">
-      <div style="display:inline-block;background:rgba(255,255,255,0.15);border-radius:12px;padding:10px 20px;margin-bottom:12px">
-        <span style="color:#ffffff;font-size:22px;font-weight:900;letter-spacing:0.06em">WDX IMPACT</span>
+    <div style="background:#ffffff;border-radius:16px 16px 0 0;padding:28px 32px;text-align:center;border:2px solid #e86c2f;border-bottom:none">
+      <div style="display:inline-block;border-radius:12px;padding:10px 20px;margin-bottom:12px">
+        <span style="color:#e86c2f;font-size:26px;font-weight:900;letter-spacing:0.06em">WDX IMPACT</span>
       </div>
-      <div style="color:rgba(255,255,255,0.85);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:4px">Field Measurements</div>
-      <h1 style="color:#ffffff;margin:16px 0 0;font-size:20px;font-weight:700">Window & Door Measure Form</h1>
+      <div style="color:#e86c2f;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:4px;opacity:0.7">Field Measurements</div>
+      <h1 style="color:#e86c2f;margin:16px 0 0;font-size:20px;font-weight:700">Window &amp; Door Measure Form</h1>
     </div>
 
     <!-- Orange accent bar -->
