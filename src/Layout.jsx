@@ -10,11 +10,14 @@ export default function Layout({ children, currentPageName }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    base44.auth.me().then(u => {
-      if (!u) {
+    base44.auth.isAuthenticated().then(isAuth => {
+      if (!isAuth) {
         base44.auth.redirectToLogin();
         return;
       }
+      return base44.auth.me();
+    }).then(u => {
+      if (!u) return;
       setUser(u);
       setAuthChecked(true);
     }).catch(() => {
