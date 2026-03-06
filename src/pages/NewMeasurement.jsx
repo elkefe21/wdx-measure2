@@ -34,6 +34,8 @@ export default function NewMeasurement() {
     techName: "",
     date: new Date().toISOString().split("T")[0],
     clientName: "",
+    clientPhone: "",
+    clientEmail: "",
     address: "",
     city: "",
     zip: "",
