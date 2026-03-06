@@ -47,6 +47,7 @@ export default function NewMeasurement() {
   });
 
   const [lineItems, setLineItems] = useState([emptyItem(), emptyItem(), emptyItem()]);
+  const [photos, setPhotos] = useState([]);
 
   // Total sqft calculation
   const totalSqft = useMemo(() => {

@@ -53,6 +53,22 @@ export default function SubmissionDetail({ submission, onClose }) {
           )}
         </div>
 
+        {/* Photos */}
+        {submission.photos?.length > 0 && (
+          <div className="mb-5">
+            <div className="font-syne text-[11px] font-bold text-[#e86c2f] uppercase tracking-[0.18em] mb-2.5 flex items-center gap-2 after:content-[''] after:flex-1 after:h-px after:bg-[rgba(232,108,47,0.25)]">
+              Site Photos
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              {submission.photos.map((url, i) => (
+                <a key={i} href={url} target="_blank" rel="noopener noreferrer" className="block aspect-square rounded-xl overflow-hidden border border-[#e0dbd4] bg-[#f4f2ee]">
+                  <img src={url} alt={`Photo ${i + 1}`} className="w-full h-full object-cover hover:opacity-90 transition-opacity" />
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Line items table */}
         <div className="font-syne text-[11px] font-bold text-[#e86c2f] uppercase tracking-[0.18em] mb-2.5 flex items-center gap-2 after:content-[''] after:flex-1 after:h-px after:bg-[rgba(232,108,47,0.25)]">
           Line Items
