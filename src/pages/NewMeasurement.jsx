@@ -84,6 +84,7 @@ export default function NewMeasurement() {
       clientName: measurement.client_name || "",
       clientPhone: measurement.client_phone || "",
       clientEmail: measurement.client_email || "",
+      photos: measurement.photos || [],
       address: measurement.address || "",
       city: measurement.city || "",
       zip: measurement.zip || "",
@@ -92,6 +93,7 @@ export default function NewMeasurement() {
       loweCoating: measurement.lowe_coating || "NONE",
       jobNotes: measurement.job_notes || "",
     });
+    setPhotos(measurement.photos || []);
     if (measurement.line_items?.length > 0) {
       setLineItems(measurement.line_items.map(i => ({
         mark: i.mark || "",
