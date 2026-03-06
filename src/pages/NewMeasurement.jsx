@@ -80,6 +80,8 @@ export default function NewMeasurement() {
       techName: measurement.tech_name || "",
       date: measurement.date || new Date().toISOString().split("T")[0],
       clientName: measurement.client_name || "",
+      clientPhone: measurement.client_phone || "",
+      clientEmail: measurement.client_email || "",
       address: measurement.address || "",
       city: measurement.city || "",
       zip: measurement.zip || "",
@@ -114,6 +116,8 @@ export default function NewMeasurement() {
       techName: d.techName || "",
       date: d.date || new Date().toISOString().split("T")[0],
       clientName: d.clientName || "",
+      clientPhone: d.clientPhone || "",
+      clientEmail: d.clientEmail || "",
       address: d.address || "",
       city: d.city || "",
       zip: d.zip || "",
@@ -226,6 +230,8 @@ export default function NewMeasurement() {
         tech_name: form.techName,
         date: form.date,
         client_name: form.clientName,
+        client_phone: form.clientPhone,
+        client_email: form.clientEmail,
         address: form.address,
         city: form.city,
         zip: form.zip,
@@ -290,7 +296,8 @@ export default function NewMeasurement() {
     setDraftId(null);
     setForm({
       permitted: "", techName: "", date: new Date().toISOString().split("T")[0],
-      clientName: "", address: "", city: "", zip: "", glassColor: "",
+      clientName: "", clientPhone: "", clientEmail: "",
+      address: "", city: "", zip: "", glassColor: "",
       frameColor: "", loweCoating: "NONE", jobNotes: "",
     });
     setLineItems([emptyItem(), emptyItem(), emptyItem()]);
