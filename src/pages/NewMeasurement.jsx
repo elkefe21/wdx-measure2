@@ -244,6 +244,7 @@ export default function NewMeasurement() {
         frame_color: form.frameColor,
         lowe_coating: form.loweCoating,
         job_notes: form.jobNotes,
+        photos: photos,
         line_items: filledItems,
         total_sqft: totalSqft,
         status: "submitted",
@@ -270,6 +271,7 @@ export default function NewMeasurement() {
           jobNotes: form.jobNotes,
         },
         lineItems: filledItems,
+        photos: photos,
         totalSqft: totalSqft.toFixed(2),
       });
 
