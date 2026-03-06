@@ -104,7 +104,7 @@ Deno.serve(async (req) => {
     const user = await base44.auth.me();
     if (!user) return Response.json({ error: 'Unauthorized' }, { status: 401 });
 
-    const { jobInfo, lineItems, totalSqft } = await req.json();
+    const { jobInfo, lineItems, photos, totalSqft } = await req.json();
 
     const MONDAY_API_KEY = Deno.env.get('MONDAY_API_KEY');
     const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');

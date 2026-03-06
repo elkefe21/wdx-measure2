@@ -433,6 +433,11 @@ export default function NewMeasurement() {
         </button>
       </SectionCard>
 
+      {/* Site Photos */}
+      <SectionCard title="Site Photos">
+        <PhotoUpload photos={photos} onChange={setPhotos} />
+      </SectionCard>
+
       {/* Sqft Summary */}
       <div className="bg-gradient-to-br from-[rgba(232,108,47,0.08)] to-[rgba(232,108,47,0.03)] border border-[#e86c2f] rounded-2xl p-5 mb-4 flex items-center justify-between">
         <div>
