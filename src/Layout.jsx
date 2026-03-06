@@ -95,7 +95,7 @@ export default function Layout({ children, currentPageName }) {
               </Link>
             ))}
             <button
-              onClick={() => base44.auth.logout(window.location.href)}
+              onClick={() => base44.auth.logout()}
               className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs text-[#888880] border border-[#e0dbd4] bg-[#f4f2ee] hover:text-[#e86c2f] hover:border-[#e86c2f] transition-all cursor-pointer font-sans"
             >
               <LogOut className="w-3.5 h-3.5" />
@@ -124,7 +124,7 @@ export default function Layout({ children, currentPageName }) {
             </Link>
           ))}
           <button
-            onClick={() => base44.auth.logout(window.location.href)}
+            onClick={() => base44.auth.logout()}
             className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-[#888880] hover:text-[#e86c2f] transition-all cursor-pointer font-sans text-left"
           >
             <LogOut className="w-4 h-4" />
