@@ -130,6 +130,7 @@ export default function NewMeasurement() {
       loweCoating: d.loweCoating || "NONE",
       jobNotes: d.jobNotes || "",
     });
+    setPhotos(d.photos || []);
     if (d.lineItems?.length > 0) {
       setLineItems(d.lineItems.map(i => ({
         mark: i.mark || "",
@@ -165,7 +166,7 @@ export default function NewMeasurement() {
   }, [form, lineItems, draftId]);
 
   const saveDraft = async () => {
-    const data = { ...form, lineItems, totalSqft };
+    const data = { ...form, lineItems, photos, totalSqft };
     if (draftId) {
       await base44.entities.Draft.update(draftId, { data });
     } else {
@@ -305,6 +306,7 @@ export default function NewMeasurement() {
       frameColor: "", loweCoating: "NONE", jobNotes: "",
     });
     setLineItems([emptyItem(), emptyItem(), emptyItem()]);
+    setPhotos([]);
   };
 
   if (submitted) {
