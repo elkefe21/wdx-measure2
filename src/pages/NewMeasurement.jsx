@@ -10,6 +10,7 @@ import FieldGroup from "@/components/wdx/FieldGroup";
 import ToggleGroup from "@/components/wdx/ToggleGroup";
 import LineItem from "@/components/wdx/LineItem";
 import { GLASS_COLORS, FRAME_COLORS, LOWE_COATINGS } from "@/components/wdx/constants";
+import PhotoUpload from "@/components/wdx/PhotoUpload";
 
 const emptyItem = () => ({ mark: "", series: "", config: "", width: "", height: "", qty: "1", notes: "" });
 

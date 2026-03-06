@@ -1,6 +1,6 @@
 import React from "react";
 import { format } from "date-fns";
-import { X } from "lucide-react";
+import { X, Image } from "lucide-react";
 
 export default function SubmissionDetail({ submission, onClose }) {
   if (!submission) return null;
