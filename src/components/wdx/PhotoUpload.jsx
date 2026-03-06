@@ -60,7 +60,6 @@ export default function PhotoUpload({ photos, onChange }) {
         type="file"
         accept="image/*"
         multiple
-        capture="environment"
         className="hidden"
         onChange={e => handleFiles(e.target.files)}
       />
