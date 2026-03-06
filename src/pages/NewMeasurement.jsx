@@ -343,6 +343,15 @@ export default function NewMeasurement() {
           <input type="text" value={form.clientName} onChange={e => updateForm("clientName", e.target.value)} placeholder="Client / homeowner name" className={inputClass} />
         </FieldGroup>
 
+        <div className="grid grid-cols-2 gap-2.5">
+          <FieldGroup label="Homeowner Phone">
+            <input type="tel" value={form.clientPhone} onChange={e => updateForm("clientPhone", e.target.value)} placeholder="(305) 555-0100" inputMode="tel" className={inputClass} />
+          </FieldGroup>
+          <FieldGroup label="Homeowner Email">
+            <input type="email" value={form.clientEmail} onChange={e => updateForm("clientEmail", e.target.value)} placeholder="owner@email.com" className={inputClass} />
+          </FieldGroup>
+        </div>
+
         <FieldGroup label="Job Site Address" required>
           <input type="text" value={form.address} onChange={e => updateForm("address", e.target.value)} placeholder="Street address" className={inputClass} />
         </FieldGroup>
