@@ -248,6 +248,13 @@ Deno.serve(async (req) => {
           </tr></tfoot>
         </table>
       </div>
+      ${photos?.length ? `
+      <div style="padding:20px 24px 8px;background:#f9f7f5;border-top:2px solid #e86c2f">
+        <div style="font-size:11px;font-weight:700;color:#e86c2f;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:12px">Site Photos (${photos.length})</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          ${photos.map((url, i) => `<a href="${url}" target="_blank" style="display:block;width:160px;height:120px;border-radius:8px;overflow:hidden;border:1px solid #e0dbd4;flex-shrink:0"><img src="${url}" alt="Photo ${i+1}" width="160" height="120" style="width:100%;height:100%;object-fit:cover;display:block" /></a>`).join('')}
+        </div>
+      </div>` : ''}
       <div style="padding:20px 24px;background:#f9f7f5;border-top:1px solid #ede9e3;text-align:center">
         <div style="font-size:12px;color:#aaa">WDX Impact Windows &amp; Doors · CGC #1535086<br>Miami-Dade · Broward · Palm Beach</div>
       </div>
