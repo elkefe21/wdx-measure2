@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
-import { Plus, Zap, Clock, WifiOff } from "lucide-react";
+import { Plus, Zap, Clock, WifiOff, Search } from "lucide-react";
 import SubmissionCard from "@/components/wdx/SubmissionCard";
 import SubmissionDetail from "@/components/wdx/SubmissionDetail";
 
