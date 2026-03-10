@@ -19,8 +19,9 @@ export default function NewMeasurement() {
   const [draftId, setDraftId] = useState(null);
   const [sending, setSending] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [submitted, setSubmitted] = useState(null); // { clientName, totalSqft }
+  const [submitted, setSubmitted] = useState(null);
   const [validationError, setValidationError] = useState(null);
+  const [needsName, setNeedsName] = useState(false);
   const saveTimerRef = useRef(null);
   const [user, setUser] = useState(null);
 
