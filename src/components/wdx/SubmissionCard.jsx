@@ -5,6 +5,7 @@ import { createPageUrl } from "@/utils";
 import { Pencil, Copy } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { toast } from "sonner";
+import ConfirmModal from "@/components/wdx/ConfirmModal";
 
 export default function SubmissionCard({ submission, onClick }) {
   const [showCopyConfirm, setShowCopyConfirm] = useState(false);
