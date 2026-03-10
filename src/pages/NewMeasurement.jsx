@@ -212,8 +212,13 @@ export default function NewMeasurement() {
   };
 
   const handleSend = async () => {
+    setValidationError(null);
     const err = validate();
-    if (err) { toast.error(err); return; }
+    if (err) {
+      setValidationError(err);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     setShowConfirm(true);
   };
 
