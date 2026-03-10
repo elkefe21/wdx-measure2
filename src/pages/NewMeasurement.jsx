@@ -24,10 +24,15 @@ export default function NewMeasurement() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    base44.auth.me().then(u => {
+    (async () => {
+      let u = await base44.auth.me();
+      if (u && !u.full_name) {
+        await base44.auth.updateMe({ full_name: u.email });
+        u = await base44.auth.me();
+      }
       setUser(u);
-      setForm(prev => ({ ...prev, techName: u?.full_name || "" }));
-    }).catch(() => {});
+      setForm(prev => ({ ...prev, techName: u?.full_name || u?.email || "" }));
+    })();
   }, []);
 
   const [form, setForm] = useState({
