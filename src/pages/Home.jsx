@@ -139,6 +139,17 @@ export default function Home() {
         Submitted Jobs
       </div>
 
+      <div className="relative mb-4">
+        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#aaa] pointer-events-none" />
+        <input
+          type="text"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          placeholder="Search by client or address…"
+          className="w-full bg-white border border-[#e8e4de] rounded-[10px] pl-10 pr-4 py-3 text-[14px] text-[#1a1a1a] placeholder-[#aaa] outline-none focus:border-[#e86c2f] focus:shadow-[0_0_0_3px_rgba(232,108,47,0.1)] transition-all"
+        />
+      </div>
+
       {subsLoading ? (
         <div className="text-center py-10">
           <div className="w-8 h-8 border-3 border-[#e8e4de] border-t-[#e86c2f] rounded-full animate-spin mx-auto mb-3" />
