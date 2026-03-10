@@ -89,32 +89,17 @@ export default function SubmissionCard({ submission, onClick }) {
         </div>
       </div>
 
-      {/* Copy confirmation popup */}
       {showCopyConfirm && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[300] flex items-center justify-center p-5">
-          <div className="bg-white border border-[#e8e4de] rounded-[20px] p-7 w-full max-w-[380px]">
-            <div className="text-[30px] mb-3 text-center">📋</div>
-            <h2 className="font-syne text-[18px] font-extrabold mb-2 text-center">Copy this job?</h2>
-            <p className="text-[13px] text-[#888880] mb-5 text-center leading-relaxed">
-              A copy of <strong className="text-[#1a1a1a]">{submission.client_name}</strong> will be saved as a new draft so you can edit and resubmit it.
-            </p>
-            <div className="flex gap-2.5">
-              <button
-                onClick={() => setShowCopyConfirm(false)}
-                className="flex-1 py-3.5 bg-transparent border border-[#e0dbd4] rounded-xl text-[#888880] font-syne text-[14px] font-bold cursor-pointer hover:border-[#e86c2f] hover:text-[#e86c2f] transition-all"
-              >
-                No
-              </button>
-              <button
-                onClick={handleCopy}
-                disabled={copying}
-                className="flex-[2] py-3.5 bg-[#e86c2f] border-none rounded-xl text-white font-syne text-[14px] font-extrabold cursor-pointer hover:bg-[#c9561f] transition-all disabled:opacity-60"
-              >
-                {copying ? "Copying..." : "Yes, Copy"}
-              </button>
-            </div>
-          </div>
-        </div>
+        <ConfirmModal
+          emoji="📋"
+          title="Copy this job?"
+          message={<>A copy of <strong className="text-[#1a1a1a]">{submission.client_name}</strong> will be saved as a new draft so you can edit and resubmit it.</>}
+          confirmLabel={copying ? "Copying..." : "Yes, Copy"}
+          cancelLabel="No"
+          onConfirm={handleCopy}
+          onCancel={() => setShowCopyConfirm(false)}
+          loading={copying}
+        />
       )}
     </>
   );
