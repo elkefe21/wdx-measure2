@@ -268,8 +268,13 @@ export default function NewMeasurement() {
         await base44.entities.Measurement.create(measurementData);
       }
 
-      // Send email + create Monday.com entries
-      const submitRes = await base44.functions.invoke('onMeasurementSubmitted', {
+      // Clear draft
+      if (draftId) {
+        await base44.entities.Draft.delete(draftId);
+      }
+
+      // Send email + create Monday.com entries (non-blocking — success screen shows regardless)
+      base44.functions.invoke('onMeasurementSubmitted', {
         jobInfo: {
           clientName: form.clientName,
           address: form.address,
@@ -286,18 +291,7 @@ export default function NewMeasurement() {
         lineItems: filledItems,
         photos: photos,
         totalSqft: totalSqft.toFixed(2),
-      });
-
-      if (!submitRes.data?.success) {
-        toast.error("Submission failed: " + (submitRes.data?.error || "Unknown error"));
-        setSending(false);
-        return;
-      }
-
-      // Clear draft
-      if (draftId) {
-        await base44.entities.Draft.delete(draftId);
-      }
+      }).catch(err => console.error("Background notification error:", err));
 
       setSending(false);
       setSubmitted({ clientName: form.clientName, totalSqft });
