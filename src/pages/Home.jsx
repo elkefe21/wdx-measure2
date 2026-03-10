@@ -169,15 +169,32 @@ export default function Home() {
           <div className="text-[14px] text-[#aaa]">No submitted jobs yet</div>
         </div>
       ) : (
-        <div className="flex flex-col gap-2.5">
-          {submissions.map(sub => (
-            <SubmissionCard
-              key={sub.id}
-              submission={sub}
-              onClick={() => setSelectedSubmission(sub)}
-            />
-          ))}
-        </div>
+        (() => {
+          const q = search.trim().toLowerCase();
+          const filtered = q
+            ? submissions.filter(s =>
+                s.client_name?.toLowerCase().includes(q) ||
+                s.address?.toLowerCase().includes(q) ||
+                s.city?.toLowerCase().includes(q)
+              )
+            : submissions;
+          return filtered.length === 0 ? (
+            <div className="text-center py-10">
+              <div className="text-[32px] mb-2.5">🔍</div>
+              <div className="text-[14px] text-[#aaa]">No jobs match "{search}"</div>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-2.5">
+              {filtered.map(sub => (
+                <SubmissionCard
+                  key={sub.id}
+                  submission={sub}
+                  onClick={() => setSelectedSubmission(sub)}
+                />
+              ))}
+            </div>
+          );
+        })()
       )}
 
       {selectedSubmission && (
