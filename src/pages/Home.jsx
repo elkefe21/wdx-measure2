@@ -143,6 +143,14 @@ export default function Home() {
           <div className="w-8 h-8 border-3 border-[#e8e4de] border-t-[#e86c2f] rounded-full animate-spin mx-auto mb-3" />
           <div className="text-[13px] text-[#aaa]">Loading history...</div>
         </div>
+      ) : subsError ? (
+        <div className="bg-white border border-[#e8e4de] rounded-2xl p-6 flex items-center gap-3 text-[#888880]">
+          <WifiOff className="w-5 h-5 shrink-0" />
+          <div>
+            <div className="text-[14px] font-medium text-[#1a1a1a]">Couldn't load jobs</div>
+            <div className="text-[13px]">Check your connection and pull to refresh.</div>
+          </div>
+        </div>
       ) : submissions.length === 0 ? (
         <div className="text-center py-10">
           <div className="text-[36px] mb-2.5">📭</div>
