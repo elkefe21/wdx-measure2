@@ -27,13 +27,14 @@ export default function NewMeasurement() {
 
   useEffect(() => {
     (async () => {
-      let u = await base44.auth.me();
-      if (u && !u.full_name) {
-        await base44.auth.updateMe({ full_name: u.email });
-        u = await base44.auth.me();
-      }
+      const u = await base44.auth.me();
       setUser(u);
-      setForm(prev => ({ ...prev, techName: u?.full_name || u?.email || "" }));
+      if (u?.full_name) {
+        setForm(prev => ({ ...prev, techName: u.full_name }));
+      } else {
+        // No name yet — show prompt so they can set it
+        setNeedsName(true);
+      }
     })();
   }, []);
 
