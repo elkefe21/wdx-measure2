@@ -75,6 +75,11 @@ export default function Home() {
           <div className="w-8 h-8 border-3 border-[#e8e4de] border-t-[#e86c2f] rounded-full animate-spin mx-auto mb-3" />
           <div className="text-[13px] text-[#aaa]">Loading...</div>
         </div>
+      ) : draftsError ? (
+        <div className="bg-white border border-[#e8e4de] rounded-2xl p-5 mb-6 flex items-center gap-3 text-[#888880]">
+          <WifiOff className="w-4 h-4 shrink-0" />
+          <span className="text-[13px]">Couldn't load draft — check your connection.</span>
+        </div>
       ) : draftData && Object.keys(draftData).length > 0 ? (
         <div className="bg-white border-2 border-[#e86c2f] rounded-2xl p-5 mb-6 shadow-[0_2px_12px_rgba(232,108,47,0.1)]">
           <div className="inline-flex items-center gap-1.5 font-mono text-[10px] font-medium text-[#e86c2f] bg-[rgba(232,108,47,0.1)] rounded-md px-2 py-1 mb-3 uppercase tracking-wide">
