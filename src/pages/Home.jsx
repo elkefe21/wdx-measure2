@@ -10,6 +10,7 @@ import SubmissionDetail from "@/components/wdx/SubmissionDetail";
 export default function Home() {
   const [user, setUser] = useState(null);
   const [selectedSubmission, setSelectedSubmission] = useState(null);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     base44.auth.me().then(u => setUser(u)).catch(() => {});
