@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
-import { Plus, Zap, Clock } from "lucide-react";
-import SectionCard from "@/components/wdx/SectionCard";
+import { Plus, Zap, Clock, WifiOff } from "lucide-react";
 import SubmissionCard from "@/components/wdx/SubmissionCard";
 import SubmissionDetail from "@/components/wdx/SubmissionDetail";
 
@@ -13,25 +12,17 @@ export default function Home() {
   const [selectedSubmission, setSelectedSubmission] = useState(null);
 
   useEffect(() => {
-    base44.auth.me().then(u => {
-      if (!u) {
-        base44.auth.redirectToLogin();
-        return;
-      }
-      setUser(u);
-    }).catch(() => {
-      base44.auth.redirectToLogin();
-    });
+    base44.auth.me().then(u => setUser(u)).catch(() => {});
   }, []);
 
-  const { data: drafts = [], isLoading: draftsLoading } = useQuery({
-    queryKey: ["drafts"],
+  const { data: drafts = [], isLoading: draftsLoading, isError: draftsError } = useQuery({
+    queryKey: ["drafts", user?.id],
     queryFn: () => base44.entities.Draft.list("-updated_date", 1).then(r => Array.isArray(r) ? r : []),
     enabled: !!user,
   });
 
-  const { data: submissions = [], isLoading: subsLoading } = useQuery({
-    queryKey: ["submissions"],
+  const { data: submissions = [], isLoading: subsLoading, isError: subsError } = useQuery({
+    queryKey: ["submissions", user?.id],
     queryFn: () => base44.entities.Measurement.list("-created_date", 50).then(r => Array.isArray(r) ? r : []),
     enabled: !!user,
   });
