@@ -482,7 +482,8 @@ export default function NewMeasurement() {
       <div className="fixed bottom-0 left-0 right-0 bg-white/[0.97] border-t border-[#e8e4de] p-4 pb-[calc(16px+env(safe-area-inset-bottom))] backdrop-blur-2xl z-50 flex gap-3 max-w-[640px] mx-auto">
         <button
           onClick={handleSend}
-          className="flex-1 py-4 bg-[#e86c2f] border-none rounded-xl text-white font-syne text-[15px] font-extrabold cursor-pointer hover:bg-[#c9561f] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+          disabled={!user}
+          className="flex-1 py-4 bg-[#e86c2f] border-none rounded-xl text-white font-syne text-[15px] font-extrabold cursor-pointer hover:bg-[#c9561f] active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <Send className="w-4 h-4" /> Send to WDX →
         </button>
