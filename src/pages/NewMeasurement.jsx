@@ -328,6 +328,18 @@ export default function NewMeasurement() {
 
   return (
     <div>
+      {/* Validation error banner */}
+      {validationError && (
+        <div className="bg-[#fff0ee] border border-[#e86c2f] rounded-[12px] px-4 py-3 mb-4 flex items-start gap-2.5">
+          <span className="text-[#e86c2f] text-[18px] leading-none mt-0.5">⚠️</span>
+          <div>
+            <div className="font-syne text-[13px] font-bold text-[#e86c2f]">Can't send yet</div>
+            <div className="text-[13px] text-[#c05010] mt-0.5">{validationError}</div>
+          </div>
+          <button onClick={() => setValidationError(null)} className="ml-auto text-[#e86c2f] text-[18px] leading-none font-bold cursor-pointer bg-transparent border-none">×</button>
+        </div>
+      )}
+
       {/* Header sqft badge */}
       <div className="flex items-center justify-between mb-5">
         <h1 className="font-syne text-xl font-extrabold text-[#1a1a1a]">{editId ? "Edit Measurement" : "New Measurement"}</h1>
