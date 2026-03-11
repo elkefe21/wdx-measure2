@@ -1,5 +1,6 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.20';
 
+// v2
 const MONDAY_API = 'https://api.monday.com/v2';
 const PROPOSALS_BOARD = '5621135120';
 const CLIENTS_BOARD = '18401968020';
