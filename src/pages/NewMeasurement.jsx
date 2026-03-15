@@ -384,6 +384,21 @@ export default function NewMeasurement() {
             <input type="text" value={form.zip} onChange={e => updateForm("zip", e.target.value)} placeholder="33101" inputMode="numeric" className={inputClass} />
           </FieldGroup>
         </div>
+
+        <div className="grid grid-cols-2 gap-2.5">
+          <FieldGroup label="Frame Color">
+            <select value={form.frameColor} onChange={e => updateForm("frameColor", e.target.value)} className={selectClass}>
+              <option value="">Select frame color...</option>
+              {["Clear Anodized","White","White 2605","Arcadia Silver 2605","Bronze Powdercoat","Bronze 2605","Black Matte","Texture Black","MG CHARCOAL","Wood Grain Dark Walnut","Wood Grain Java"].map(f => <option key={f} value={f}>{f}</option>)}
+            </select>
+          </FieldGroup>
+          <FieldGroup label="Low-E Coating">
+            <select value={form.loweCoating} onChange={e => updateForm("loweCoating", e.target.value)} className={selectClass}>
+              <option value="">Select Low-E...</option>
+              {["NONE","CLIMA GUARD 62/27","SB70","SB60"].map(l => <option key={l} value={l}>{l}</option>)}
+            </select>
+          </FieldGroup>
+        </div>
       </SectionCard>
 
       {/* Job Notes */}
