@@ -48,9 +48,6 @@ export default function NewMeasurement() {
     address: "",
     city: "",
     zip: "",
-    glassColor: "",
-    frameColor: "",
-    loweCoating: "NONE",
     jobNotes: "",
   });
 
