@@ -197,9 +197,6 @@ Deno.serve(async (req) => {
         ${field('Measured By', jobInfo.techName)}
         ${field('Date', jobInfo.date)}
         ${field('Permitted', jobInfo.permitted)}
-        ${field('Glass Color', jobInfo.glassColor)}
-        ${field('Frame Color', jobInfo.frameColor)}
-        ${field('Low-E Coating', jobInfo.loweCoating)}
         ${jobInfo.jobNotes ? field('Job Notes', jobInfo.jobNotes) : ''}
       </tbody></table>
       <div style="padding:20px 20px 8px;background:#f9f7f5;border-top:2px solid #e86c2f">
