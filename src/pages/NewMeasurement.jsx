@@ -129,20 +129,20 @@ export default function NewMeasurement() {
       address: d.address || "",
       city: d.city || "",
       zip: d.zip || "",
-      glassColor: d.glassColor || "",
-      frameColor: d.frameColor || "",
-      loweCoating: d.loweCoating || "NONE",
       jobNotes: d.jobNotes || "",
     });
     setPhotos(d.photos || []);
     if (d.lineItems?.length > 0) {
       setLineItems(d.lineItems.map(i => ({
         mark: i.mark || "",
-        series: i.series || "",
-        config: i.config || "",
+        system: i.system || "",
+        configuration: i.configuration || "",
         width: i.width || "",
         height: i.height || "",
-        qty: i.qty || 1,
+        quantity: i.quantity || "1",
+        frame: i.frame || "",
+        glass: i.glass || "",
+        description: i.description || "",
         notes: i.notes || "",
       })));
     }
