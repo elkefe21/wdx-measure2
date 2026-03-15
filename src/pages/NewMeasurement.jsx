@@ -461,8 +461,7 @@ export default function NewMeasurement() {
             <div className="font-mono text-[12px] text-[#e8a020] mb-4 p-3 bg-[rgba(240,165,0,0.08)] rounded-[10px] border border-[rgba(240,165,0,0.2)]">
               <div>Client: <strong>{form.clientName}</strong></div>
               <div>Address: {form.address}, {form.city}</div>
-              <div>Items: {lineItems.filter(i => i.series).length} | Total: {totalSqft.toFixed(2)} ft²</div>
-              <div>Glass: {form.glassColor} | Frame: {form.frameColor}</div>
+              <div>Items: {lineItems.filter(i => i.system).length} | Total: {totalSqft.toFixed(2)} ft²</div>
             </div>
             <div className="flex gap-2.5">
               <button
