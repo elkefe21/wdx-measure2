@@ -89,24 +89,23 @@ export default function NewMeasurement() {
       clientName: measurement.client_name || "",
       clientPhone: measurement.client_phone || "",
       clientEmail: measurement.client_email || "",
-      photos: measurement.photos || [],
       address: measurement.address || "",
       city: measurement.city || "",
       zip: measurement.zip || "",
-      glassColor: measurement.glass_color || "",
-      frameColor: measurement.frame_color || "",
-      loweCoating: measurement.lowe_coating || "NONE",
       jobNotes: measurement.job_notes || "",
     });
     setPhotos(measurement.photos || []);
     if (measurement.line_items?.length > 0) {
       setLineItems(measurement.line_items.map(i => ({
         mark: i.mark || "",
-        series: i.series || "",
-        config: i.config || "",
+        system: i.system || "",
+        configuration: i.configuration || "",
         width: i.width || "",
         height: i.height || "",
-        qty: i.qty || "1",
+        quantity: i.quantity || "1",
+        frame: i.frame || "",
+        glass: i.glass || "",
+        description: i.description || "",
         notes: i.notes || "",
       })));
     }
