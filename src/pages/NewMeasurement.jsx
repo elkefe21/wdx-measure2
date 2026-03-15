@@ -305,7 +305,7 @@ export default function NewMeasurement() {
     setForm({
       permitted: "", techName: "", date: new Date().toISOString().split("T")[0],
       clientName: "", clientPhone: "", clientEmail: "",
-      address: "", city: "", zip: "", jobNotes: "",
+      address: "", city: "", zip: "", frameColor: "", loweCoating: "", jobNotes: "",
     });
     setLineItems([emptyItem(), emptyItem(), emptyItem()]);
     setPhotos([]);
