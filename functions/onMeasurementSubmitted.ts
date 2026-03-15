@@ -218,8 +218,8 @@ Deno.serve(async (req) => {
           </tr></thead>
           <tbody>${itemRows}</tbody>
           <tfoot><tr style="background:#fff8f5">
-            <td colspan="8" style="padding:14px 20px;font-size:14px;font-weight:700;color:#1a1a1a;text-align:right">Total Square Footage:</td>
-            <td colspan="2" style="padding:14px 20px;font-size:18px;font-weight:900;color:#e86c2f">${parseFloat(totalSqft).toFixed(2)} ft²</td>
+            <td colspan="9" style="padding:14px 20px;font-size:14px;font-weight:700;color:#1a1a1a;text-align:right">Total Square Footage:</td>
+            <td style="padding:14px 20px;font-size:18px;font-weight:900;color:#e86c2f">${parseFloat(totalSqft).toFixed(2)} ft²</td>
           </tr></tfoot>
         </table>
       </div>
