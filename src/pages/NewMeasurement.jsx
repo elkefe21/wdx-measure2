@@ -59,7 +59,7 @@ export default function NewMeasurement() {
     return lineItems.reduce((acc, item) => {
       const w = parseFloat(item.width) || 0;
       const h = parseFloat(item.height) || 0;
-      const q = parseFloat(item.qty) || 1;
+      const q = parseFloat(item.quantity) || 1;
       return acc + (w * h / 144) * q;
     }, 0);
   }, [lineItems]);
