@@ -131,6 +131,8 @@ export default function NewMeasurement() {
       address: d.address || "",
       city: d.city || "",
       zip: d.zip || "",
+      frameColor: d.frameColor || "",
+      loweCoating: d.loweCoating || "",
       jobNotes: d.jobNotes || "",
     });
     setPhotos(d.photos || []);
