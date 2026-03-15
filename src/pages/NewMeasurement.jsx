@@ -226,11 +226,11 @@ export default function NewMeasurement() {
 
     try {
       const filledItems = lineItems
-        .filter(i => i.series || i.width || i.height)
+        .filter(i => i.system || i.width || i.height)
         .map((item, idx) => {
           const w = parseFloat(item.width) || 0;
           const h = parseFloat(item.height) || 0;
-          const q = parseFloat(item.qty) || 1;
+          const q = parseFloat(item.quantity) || 1;
           return {
             ...item,
             item: idx + 1,
