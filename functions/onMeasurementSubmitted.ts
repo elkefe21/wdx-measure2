@@ -205,16 +205,16 @@ Deno.serve(async (req) => {
       <div style="overflow-x:auto">
         <table style="width:100%;border-collapse:collapse;min-width:560px">
           <thead><tr style="background:#f0ede8">
-            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase">#</th>
             <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Mark</th>
-            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Series</th>
-            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Config</th>
+            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">System</th>
+            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase">Qty</th>
+            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Configuration</th>
             <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase">W</th>
             <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase">H</th>
-            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase">Qty</th>
+            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Frame</th>
+            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Description</th>
+            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Glass</th>
             <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase">ft²</th>
-            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Options</th>
-            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Notes</th>
           </tr></thead>
           <tbody>${itemRows}</tbody>
           <tfoot><tr style="background:#fff8f5">
