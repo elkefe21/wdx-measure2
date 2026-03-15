@@ -86,7 +86,7 @@ async function createProposalItem(jobInfo, totalSqft, apiKey) {
 }
 
 async function createSubitem(parentId, lineItem, apiKey) {
-  const label = `#${lineItem.item} ${lineItem.mark || ''} ${lineItem.series || ''} ${lineItem.config || ''}`.trim();
+  const label = `${lineItem.mark || ''} ${lineItem.system || ''} ${lineItem.configuration || ''}`.trim();
   const name = label.replace(/"/g, '\\"');
   const query = `
     mutation {
