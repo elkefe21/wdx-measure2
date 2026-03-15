@@ -85,14 +85,30 @@ export const FRAME_OPTIONS = [
 ];
 
 export const GLASS_SPECS = [
+  // ── 3/16" Laminates ──
   '3/16 CLEAR HS + 0.090 PVB + 3/16 CLEAR HS',
   '3/16 GRAY HS + 0.090 PVB + 3/16 CLEAR HS',
   '3/16 GRAY HS + 0.090 PVB (WHITE INTERLAYER) + 3/16 CLEAR HS',
   '3/16 BRONZE HS + 0.090 PVB + 3/16 CLEAR HS',
+  '3/16 TINT HS + 0.090 PVB + 3/16 CLEAR HS',
+  // ── 1/4" Laminates ──
   '1/4 CLEAR HS + 0.090 PVB + 1/4 CLEAR HS',
   '1/4 GRAY HS + 0.090 PVB + 1/4 CLEAR HS',
+  '1/4 BRONZE HS + 0.090 PVB + 1/4 CLEAR HS',
+  '1/4 TINT HS + 0.090 PVB + 1/4 CLEAR HS',
+  // ── 5/16" Laminates ──
+  '5/16 CLEAR HS + 0.090 PVB + 5/16 CLEAR HS',
+  '5/16 GRAY HS + 0.090 PVB + 5/16 CLEAR HS',
+  '5/16 BRONZE HS + 0.090 PVB + 5/16 CLEAR HS',
+  '5/16 TINT HS + 0.090 PVB + 5/16 CLEAR HS',
+  // ── 1/8" Laminates ──
+  '1/8 CLEAR HS + 0.090 PVB + 1/8 CLEAR HS',
   '1/8 GRAY HS + 0.090 PVB + 1/8 CLEAR HS',
   '1/8 GRAY HS + 0.090 PVB (WHITE INTERLAYER) + 1/8 CLEAR HS',
-  '1/8 CLEAR HS + 0.090 PVB + 1/8 CLEAR HS',
+  // ── ClimaGuard / Low-E Combos ──
+  '3/16 CLEAR HS + 0.090 PVB + 3/16 CLIMAGUARD HS',
+  '1/4 CLEAR HS + 0.090 PVB + 1/4 CLIMAGUARD HS',
+  '5/16 CLEAR HS + 0.090 PVB + 5/16 CLIMAGUARD HS',
+  // ── Other ──
   'N/A',
 ];
