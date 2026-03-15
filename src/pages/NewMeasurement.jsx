@@ -380,37 +380,14 @@ export default function NewMeasurement() {
         </div>
       </SectionCard>
 
-      {/* Product Specifications */}
-      <SectionCard title="Product Specifications">
-        <div className="grid grid-cols-2 gap-2.5">
-          <FieldGroup label="Glass Color" required>
-            <select value={form.glassColor} onChange={e => updateForm("glassColor", e.target.value)} className={selectClass}>
-              <option value="">Select...</option>
-              {GLASS_COLORS.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-          </FieldGroup>
-          <FieldGroup label="Frame Color" required>
-            <select value={form.frameColor} onChange={e => updateForm("frameColor", e.target.value)} className={selectClass}>
-              <option value="">Select...</option>
-              {FRAME_COLORS.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-          </FieldGroup>
-        </div>
-
-        <FieldGroup label="Low-E Coating">
-          <select value={form.loweCoating} onChange={e => updateForm("loweCoating", e.target.value)} className={selectClass}>
-            {LOWE_COATINGS.map(c => <option key={c} value={c}>{c}</option>)}
-          </select>
-        </FieldGroup>
-
-        <FieldGroup label="Job Notes">
-          <textarea
-            value={form.jobNotes}
-            onChange={e => updateForm("jobNotes", e.target.value)}
-            placeholder="Special instructions, access info, conditions..."
-            className={`${inputClass} resize-y min-h-[80px]`}
-          />
-        </FieldGroup>
+      {/* Job Notes */}
+      <SectionCard title="Job Notes">
+        <textarea
+          value={form.jobNotes}
+          onChange={e => updateForm("jobNotes", e.target.value)}
+          placeholder="Special instructions, access info, conditions..."
+          className={`${inputClass} resize-y min-h-[80px]`}
+        />
       </SectionCard>
 
       {/* Line Items */}
