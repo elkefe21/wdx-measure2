@@ -69,3 +69,30 @@ export const WINDOW_OPTION_SERIES = [
 export const DOOR_OPTION_SERIES = [
   'MG3000 (FD)', 'MG3500 (FD)', 'MG4000 (Pivot Door)',
 ];
+
+export const FRAME_OPTIONS = [
+  'Clear Anodized',
+  'White',
+  'White 2605',
+  'Arcadia Silver 2605',
+  'Bronze Powdercoat',
+  'Bronze 2605',
+  'Black Matte',
+  'Texture Black',
+  'MG CHARCOAL',
+  'Wood Grain Dark Walnut',
+  'Wood Grain Java',
+];
+
+export const GLASS_SPECS = [
+  '3/16 CLEAR HS + 0.090 PVB + 3/16 CLEAR HS',
+  '3/16 GRAY HS + 0.090 PVB + 3/16 CLEAR HS',
+  '3/16 GRAY HS + 0.090 PVB (WHITE INTERLAYER) + 3/16 CLEAR HS',
+  '3/16 BRONZE HS + 0.090 PVB + 3/16 CLEAR HS',
+  '1/4 CLEAR HS + 0.090 PVB + 1/4 CLEAR HS',
+  '1/4 GRAY HS + 0.090 PVB + 1/4 CLEAR HS',
+  '1/8 GRAY HS + 0.090 PVB + 1/8 CLEAR HS',
+  '1/8 GRAY HS + 0.090 PVB (WHITE INTERLAYER) + 1/8 CLEAR HS',
+  '1/8 CLEAR HS + 0.090 PVB + 1/8 CLEAR HS',
+  'N/A',
+];
