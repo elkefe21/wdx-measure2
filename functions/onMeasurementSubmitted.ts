@@ -134,32 +134,19 @@ Deno.serve(async (req) => {
     }
 
     // ── 4. Send email notification ────────────────────────────────────────────
+    // MR Glass-compatible CSV format
     const csvRows = [
-      ['WDX Window & Door Measure Form'],
-      [],
-      ['FIELD', 'VALUE'],
-      ['Client Name', jobInfo.clientName],
-      ['Address', jobInfo.address],
-      ['City', jobInfo.city],
-      ['Zip', jobInfo.zip],
-      ['Technician', jobInfo.techName],
-      ['Date', jobInfo.date],
-      ['Permitted', jobInfo.permitted],
-      ['Glass Color', jobInfo.glassColor],
-      ['Frame Color', jobInfo.frameColor],
-      ['Low-E Coating', jobInfo.loweCoating],
-      ['Job Notes', jobInfo.jobNotes || ''],
-      ['Total SqFt', totalSqft],
-      [],
-      ['#', 'Mark', 'Series', 'Config', 'Width (in)', 'Height (in)', 'Qty', 'SqFt', 'Privacy', 'Flush Adapter', 'LH', 'RH', 'Notes'],
+      ['Mark', 'System', 'Quantity', 'Configuration', 'Width', 'Height', 'Frame', 'Description', 'Glass'],
       ...lineItems.map(i => [
-        i.item, i.mark || '', i.series || '', i.config || '',
-        i.width || '', i.height || '', i.qty || '', i.sqft || '',
-        i['opt_Privacy'] ? 'Yes' : '',
-        i['opt_Flush Adapter (no flange)'] ? 'Yes' : '',
-        i['opt_LH'] ? 'Yes' : '',
-        i['opt_RH'] ? 'Yes' : '',
-        i.notes || '',
+        i.mark || '',
+        i.system || '',
+        i.quantity || '',
+        i.configuration || 'N/A',
+        i.width || '',
+        i.height || 'N/A',
+        i.frame || '',
+        i.description || '',
+        i.glass || '',
       ]),
     ];
     const csvContent = csvRows
