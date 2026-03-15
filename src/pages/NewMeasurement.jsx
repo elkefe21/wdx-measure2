@@ -12,7 +12,7 @@ import LineItem from "@/components/wdx/LineItem";
 import { GLASS_COLORS, FRAME_COLORS, LOWE_COATINGS } from "@/components/wdx/constants";
 import PhotoUpload from "@/components/wdx/PhotoUpload";
 
-const emptyItem = () => ({ mark: "", series: "", config: "", width: "", height: "", qty: "1", notes: "" });
+const emptyItem = () => ({ mark: "", system: "", configuration: "", width: "", height: "", quantity: "1", frame: "", glass: "", description: "", notes: "" });
 
 export default function NewMeasurement() {
   const navigate = useNavigate();
