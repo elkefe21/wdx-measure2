@@ -202,9 +202,7 @@ export default function NewMeasurement() {
     if (!form.clientName.trim()) return "Client name is required";
     if (!form.address.trim()) return "Job site address is required";
     if (!form.city.trim()) return "City is required";
-    if (!form.glassColor) return "Glass color is required";
-    if (!form.frameColor) return "Frame color is required";
-    const filledItems = lineItems.filter(i => i.series);
+    const filledItems = lineItems.filter(i => i.system);
     if (filledItems.length === 0) return "At least one line item with a series is required";
     return null;
   };
