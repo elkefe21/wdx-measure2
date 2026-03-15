@@ -280,6 +280,8 @@ export default function NewMeasurement() {
           techName: form.techName,
           date: form.date,
           permitted: form.permitted,
+          frameColor: form.frameColor,
+          loweCoating: form.loweCoating,
           jobNotes: form.jobNotes,
         },
         lineItems: filledItems,
