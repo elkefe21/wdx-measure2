@@ -94,6 +94,8 @@ export default function NewMeasurement() {
       address: measurement.address || "",
       city: measurement.city || "",
       zip: measurement.zip || "",
+      frameColor: measurement.frame_color || "",
+      loweCoating: measurement.lowe_coating || "",
       jobNotes: measurement.job_notes || "",
     });
     setPhotos(measurement.photos || []);
