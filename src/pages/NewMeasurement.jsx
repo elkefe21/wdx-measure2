@@ -9,10 +9,10 @@ import SuccessScreen from "@/components/wdx/SuccessScreen";
 import FieldGroup from "@/components/wdx/FieldGroup";
 import ToggleGroup from "@/components/wdx/ToggleGroup";
 import LineItem from "@/components/wdx/LineItem";
-
+import { GLASS_COLORS, FRAME_COLORS, LOWE_COATINGS } from "@/components/wdx/constants";
 import PhotoUpload from "@/components/wdx/PhotoUpload";
 
-const emptyItem = () => ({ mark: "", system: "", configuration: "", width: "", height: "", quantity: "1", frame: "", glass: "", description: "", notes: "" });
+const emptyItem = () => ({ mark: "", series: "", config: "", width: "", height: "", qty: "1", notes: "" });
 
 export default function NewMeasurement() {
   const navigate = useNavigate();
@@ -48,8 +48,9 @@ export default function NewMeasurement() {
     address: "",
     city: "",
     zip: "",
+    glassColor: "",
     frameColor: "",
-    loweCoating: "",
+    loweCoating: "NONE",
     jobNotes: "",
   });
 
@@ -61,7 +62,7 @@ export default function NewMeasurement() {
     return lineItems.reduce((acc, item) => {
       const w = parseFloat(item.width) || 0;
       const h = parseFloat(item.height) || 0;
-      const q = parseFloat(item.quantity) || 1;
+      const q = parseFloat(item.qty) || 1;
       return acc + (w * h / 144) * q;
     }, 0);
   }, [lineItems]);
@@ -91,25 +92,24 @@ export default function NewMeasurement() {
       clientName: measurement.client_name || "",
       clientPhone: measurement.client_phone || "",
       clientEmail: measurement.client_email || "",
+      photos: measurement.photos || [],
       address: measurement.address || "",
       city: measurement.city || "",
       zip: measurement.zip || "",
+      glassColor: measurement.glass_color || "",
       frameColor: measurement.frame_color || "",
-      loweCoating: measurement.lowe_coating || "",
+      loweCoating: measurement.lowe_coating || "NONE",
       jobNotes: measurement.job_notes || "",
     });
     setPhotos(measurement.photos || []);
     if (measurement.line_items?.length > 0) {
       setLineItems(measurement.line_items.map(i => ({
         mark: i.mark || "",
-        system: i.system || "",
-        configuration: i.configuration || "",
+        series: i.series || "",
+        config: i.config || "",
         width: i.width || "",
         height: i.height || "",
-        quantity: i.quantity || "1",
-        frame: i.frame || "",
-        glass: i.glass || "",
-        description: i.description || "",
+        qty: i.qty || "1",
         notes: i.notes || "",
       })));
     }
@@ -133,22 +133,20 @@ export default function NewMeasurement() {
       address: d.address || "",
       city: d.city || "",
       zip: d.zip || "",
+      glassColor: d.glassColor || "",
       frameColor: d.frameColor || "",
-      loweCoating: d.loweCoating || "",
+      loweCoating: d.loweCoating || "NONE",
       jobNotes: d.jobNotes || "",
     });
     setPhotos(d.photos || []);
     if (d.lineItems?.length > 0) {
       setLineItems(d.lineItems.map(i => ({
         mark: i.mark || "",
-        system: i.system || "",
-        configuration: i.configuration || "",
+        series: i.series || "",
+        config: i.config || "",
         width: i.width || "",
         height: i.height || "",
-        quantity: i.quantity || "1",
-        frame: i.frame || "",
-        glass: i.glass || "",
-        description: i.description || "",
+        qty: i.qty || 1,
         notes: i.notes || "",
       })));
     }
@@ -208,7 +206,9 @@ export default function NewMeasurement() {
     if (!form.clientName.trim()) return "Client name is required";
     if (!form.address.trim()) return "Job site address is required";
     if (!form.city.trim()) return "City is required";
-    const filledItems = lineItems.filter(i => i.system);
+    if (!form.glassColor) return "Glass color is required";
+    if (!form.frameColor) return "Frame color is required";
+    const filledItems = lineItems.filter(i => i.series);
     if (filledItems.length === 0) return "At least one line item with a series is required";
     return null;
   };
@@ -230,11 +230,11 @@ export default function NewMeasurement() {
 
     try {
       const filledItems = lineItems
-        .filter(i => i.system || i.width || i.height)
+        .filter(i => i.series || i.width || i.height)
         .map((item, idx) => {
           const w = parseFloat(item.width) || 0;
           const h = parseFloat(item.height) || 0;
-          const q = parseFloat(item.quantity) || 1;
+          const q = parseFloat(item.qty) || 1;
           return {
             ...item,
             item: idx + 1,
@@ -253,6 +253,9 @@ export default function NewMeasurement() {
         address: form.address,
         city: form.city,
         zip: form.zip,
+        glass_color: form.glassColor,
+        frame_color: form.frameColor,
+        lowe_coating: form.loweCoating,
         job_notes: form.jobNotes,
         photos: photos,
         line_items: filledItems,
@@ -280,6 +283,7 @@ export default function NewMeasurement() {
           techName: form.techName,
           date: form.date,
           permitted: form.permitted,
+          glassColor: form.glassColor,
           frameColor: form.frameColor,
           loweCoating: form.loweCoating,
           jobNotes: form.jobNotes,
@@ -307,7 +311,8 @@ export default function NewMeasurement() {
     setForm({
       permitted: "", techName: "", date: new Date().toISOString().split("T")[0],
       clientName: "", clientPhone: "", clientEmail: "",
-      address: "", city: "", zip: "", frameColor: "", loweCoating: "", jobNotes: "",
+      address: "", city: "", zip: "", glassColor: "",
+      frameColor: "", loweCoating: "NONE", jobNotes: "",
     });
     setLineItems([emptyItem(), emptyItem(), emptyItem()]);
     setPhotos([]);
@@ -386,31 +391,39 @@ export default function NewMeasurement() {
             <input type="text" value={form.zip} onChange={e => updateForm("zip", e.target.value)} placeholder="33101" inputMode="numeric" className={inputClass} />
           </FieldGroup>
         </div>
+      </SectionCard>
 
+      {/* Product Specifications */}
+      <SectionCard title="Product Specifications">
         <div className="grid grid-cols-2 gap-2.5">
-          <FieldGroup label="Frame Color">
-            <select value={form.frameColor} onChange={e => updateForm("frameColor", e.target.value)} className={selectClass}>
-              <option value="">Select frame color...</option>
-              {["Clear Anodized","White","White 2605","Arcadia Silver 2605","Bronze Powdercoat","Bronze 2605","Black Matte","Texture Black","MG CHARCOAL","Wood Grain Dark Walnut","Wood Grain Java"].map(f => <option key={f} value={f}>{f}</option>)}
+          <FieldGroup label="Glass Color" required>
+            <select value={form.glassColor} onChange={e => updateForm("glassColor", e.target.value)} className={selectClass}>
+              <option value="">Select...</option>
+              {GLASS_COLORS.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           </FieldGroup>
-          <FieldGroup label="Low-E Coating">
-            <select value={form.loweCoating} onChange={e => updateForm("loweCoating", e.target.value)} className={selectClass}>
-              <option value="">Select Low-E...</option>
-              {["NONE","CLIMA GUARD 62/27","SB70","SB60"].map(l => <option key={l} value={l}>{l}</option>)}
+          <FieldGroup label="Frame Color" required>
+            <select value={form.frameColor} onChange={e => updateForm("frameColor", e.target.value)} className={selectClass}>
+              <option value="">Select...</option>
+              {FRAME_COLORS.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           </FieldGroup>
         </div>
-      </SectionCard>
 
-      {/* Job Notes */}
-      <SectionCard title="Job Notes">
-        <textarea
-          value={form.jobNotes}
-          onChange={e => updateForm("jobNotes", e.target.value)}
-          placeholder="Special instructions, access info, conditions..."
-          className={`${inputClass} resize-y min-h-[80px]`}
-        />
+        <FieldGroup label="Low-E Coating">
+          <select value={form.loweCoating} onChange={e => updateForm("loweCoating", e.target.value)} className={selectClass}>
+            {LOWE_COATINGS.map(c => <option key={c} value={c}>{c}</option>)}
+          </select>
+        </FieldGroup>
+
+        <FieldGroup label="Job Notes">
+          <textarea
+            value={form.jobNotes}
+            onChange={e => updateForm("jobNotes", e.target.value)}
+            placeholder="Special instructions, access info, conditions..."
+            className={`${inputClass} resize-y min-h-[80px]`}
+          />
+        </FieldGroup>
       </SectionCard>
 
       {/* Line Items */}
@@ -484,7 +497,8 @@ export default function NewMeasurement() {
             <div className="font-mono text-[12px] text-[#e8a020] mb-4 p-3 bg-[rgba(240,165,0,0.08)] rounded-[10px] border border-[rgba(240,165,0,0.2)]">
               <div>Client: <strong>{form.clientName}</strong></div>
               <div>Address: {form.address}, {form.city}</div>
-              <div>Items: {lineItems.filter(i => i.system).length} | Total: {totalSqft.toFixed(2)} ft²</div>
+              <div>Items: {lineItems.filter(i => i.series).length} | Total: {totalSqft.toFixed(2)} ft²</div>
+              <div>Glass: {form.glassColor} | Frame: {form.frameColor}</div>
             </div>
             <div className="flex gap-2.5">
               <button

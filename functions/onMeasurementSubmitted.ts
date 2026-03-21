@@ -86,7 +86,7 @@ async function createProposalItem(jobInfo, totalSqft, apiKey) {
 }
 
 async function createSubitem(parentId, lineItem, apiKey) {
-  const label = `${lineItem.mark || ''} ${lineItem.system || ''} ${lineItem.configuration || ''}`.trim();
+  const label = `#${lineItem.item} ${lineItem.mark || ''} ${lineItem.series || ''} ${lineItem.config || ''}`.trim();
   const name = label.replace(/"/g, '\\"');
   const query = `
     mutation {
@@ -134,19 +134,32 @@ Deno.serve(async (req) => {
     }
 
     // ── 4. Send email notification ────────────────────────────────────────────
-    // MR Glass-compatible CSV format
     const csvRows = [
-      ['Mark', 'System', 'Quantity', 'Configuration', 'Width', 'Height', 'Frame', 'Description', 'Glass'],
+      ['WDX Window & Door Measure Form'],
+      [],
+      ['FIELD', 'VALUE'],
+      ['Client Name', jobInfo.clientName],
+      ['Address', jobInfo.address],
+      ['City', jobInfo.city],
+      ['Zip', jobInfo.zip],
+      ['Technician', jobInfo.techName],
+      ['Date', jobInfo.date],
+      ['Permitted', jobInfo.permitted],
+      ['Glass Color', jobInfo.glassColor],
+      ['Frame Color', jobInfo.frameColor],
+      ['Low-E Coating', jobInfo.loweCoating],
+      ['Job Notes', jobInfo.jobNotes || ''],
+      ['Total SqFt', totalSqft],
+      [],
+      ['#', 'Mark', 'Series', 'Config', 'Width (in)', 'Height (in)', 'Qty', 'SqFt', 'Privacy', 'Flush Adapter', 'LH', 'RH', 'Notes'],
       ...lineItems.map(i => [
-        i.mark || '',
-        i.system || '',
-        i.quantity || '',
-        i.configuration || 'N/A',
-        i.width || '',
-        i.height || 'N/A',
-        i.frame || '',
-        i.description || '',
-        i.glass || '',
+        i.item, i.mark || '', i.series || '', i.config || '',
+        i.width || '', i.height || '', i.qty || '', i.sqft || '',
+        i['opt_Privacy'] ? 'Yes' : '',
+        i['opt_Flush Adapter (no flange)'] ? 'Yes' : '',
+        i['opt_LH'] ? 'Yes' : '',
+        i['opt_RH'] ? 'Yes' : '',
+        i.notes || '',
       ]),
     ];
     const csvContent = csvRows
@@ -154,19 +167,29 @@ Deno.serve(async (req) => {
       .join('\n');
     const csvBase64 = btoa(unescape(encodeURIComponent(csvContent)));
 
-    const itemRows = lineItems.map((i, idx) => `
+    const optionKeys = [
+      { key: 'opt_Privacy', label: 'Privacy' },
+      { key: 'opt_Flush Adapter (no flange)', label: 'Flush Adapter' },
+      { key: 'opt_LH', label: 'LH' },
+      { key: 'opt_RH', label: 'RH' },
+    ];
+
+    const itemRows = lineItems.map((i, idx) => {
+      const checkedOpts = optionKeys.filter(o => i[o.key]).map(o => `<div style="color:#e86c2f;font-size:12px">&#10003; ${o.label}</div>`).join('');
+      return `
       <tr style="background:${idx % 2 === 0 ? '#ffffff' : '#f9f7f5'}">
-        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px;font-weight:600">${i.mark || '—'}</td>
-        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px">${i.system || '—'}</td>
-        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px;text-align:center">${i.quantity || '—'}</td>
-        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px">${i.configuration || 'N/A'}</td>
+        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px;text-align:center">${i.item}</td>
+        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px">${i.mark || '—'}</td>
+        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px">${i.series || '—'}</td>
+        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px">${i.config || '—'}</td>
         <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px;text-align:center">${i.width || '—'}"</td>
-        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px;text-align:center">${i.height || 'N/A'}"</td>
-        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px">${i.frame || '—'}</td>
-        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px">${i.description || '—'}</td>
-        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#888880;font-size:12px">${i.glass || '—'}</td>
+        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px;text-align:center">${i.height || '—'}"</td>
+        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#1a1a1a;font-size:13px;text-align:center">${i.qty}</td>
         <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#e86c2f;font-size:13px;font-weight:600;text-align:center">${i.sqft} ft²</td>
-      </tr>`).join('');
+        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;font-size:12px">${checkedOpts || '<span style="color:#ccc">—</span>'}</td>
+        <td style="padding:10px 12px;border-bottom:1px solid #ede9e3;color:#888880;font-size:12px">${i.notes || '—'}</td>
+      </tr>`;
+    }).join('');
 
     const field = (label, value) => `
       <tr>
@@ -197,8 +220,9 @@ Deno.serve(async (req) => {
         ${field('Measured By', jobInfo.techName)}
         ${field('Date', jobInfo.date)}
         ${field('Permitted', jobInfo.permitted)}
-        ${jobInfo.frameColor ? field('Frame Color', jobInfo.frameColor) : ''}
-        ${jobInfo.loweCoating ? field('Low-E Coating', jobInfo.loweCoating) : ''}
+        ${field('Glass Color', jobInfo.glassColor)}
+        ${field('Frame Color', jobInfo.frameColor)}
+        ${field('Low-E Coating', jobInfo.loweCoating)}
         ${jobInfo.jobNotes ? field('Job Notes', jobInfo.jobNotes) : ''}
       </tbody></table>
       <div style="padding:20px 20px 8px;background:#f9f7f5;border-top:2px solid #e86c2f">
@@ -207,21 +231,21 @@ Deno.serve(async (req) => {
       <div style="overflow-x:auto">
         <table style="width:100%;border-collapse:collapse;min-width:560px">
           <thead><tr style="background:#f0ede8">
+            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase">#</th>
             <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Mark</th>
-            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">System</th>
-            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase">Qty</th>
-            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Configuration</th>
+            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Series</th>
+            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Config</th>
             <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase">W</th>
             <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase">H</th>
-            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Frame</th>
-            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Description</th>
-            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Glass</th>
+            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase">Qty</th>
             <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase">ft²</th>
+            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Options</th>
+            <th style="padding:10px 12px;font-size:11px;font-weight:700;color:#888880;text-transform:uppercase;text-align:left">Notes</th>
           </tr></thead>
           <tbody>${itemRows}</tbody>
           <tfoot><tr style="background:#fff8f5">
-            <td colspan="9" style="padding:14px 20px;font-size:14px;font-weight:700;color:#1a1a1a;text-align:right">Total Square Footage:</td>
-            <td style="padding:14px 20px;font-size:18px;font-weight:900;color:#e86c2f">${parseFloat(totalSqft).toFixed(2)} ft²</td>
+            <td colspan="8" style="padding:14px 20px;font-size:14px;font-weight:700;color:#1a1a1a;text-align:right">Total Square Footage:</td>
+            <td colspan="2" style="padding:14px 20px;font-size:18px;font-weight:900;color:#e86c2f">${parseFloat(totalSqft).toFixed(2)} ft²</td>
           </tr></tfoot>
         </table>
       </div>
