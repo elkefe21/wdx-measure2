@@ -87,6 +87,15 @@ export const SERIES_CONFIGS = {
   'ES-P252 LMI - CASEMENT': ['X - Multipoint', 'XX - Multipoint'],
   'ES-V500 - CASEMENT': ['X - Multipoint', 'XX - Multipoint'],
   'HC-200 LMI': ['X - Multipoint', 'XX - Multipoint'],
+  // ESW Doors
+  'ES-3001': ['X', 'O', 'XX', 'OX', 'XO', 'XXO', 'OXX', 'OXXO', 'OXO'],
+  'ES-9000 - INSWING DOOR': ['X', 'O', 'XX', 'OX', 'XO', 'XXO', 'OXX', 'OXXO', 'OXO'],
+  'ES-9000': ['X', 'O', 'XX', 'OX', 'XO', 'XXO', 'OXX', 'OXXO', 'OXO'],
+  'ES-9100': ['X', 'O', 'XX', 'OX', 'XO', 'XXO', 'OXX', 'OXXO', 'OXO'],
+  'ES-EL300': ['X', 'O', 'XX', 'OX', 'XO', 'XXO', 'OXX', 'OXXO', 'OXO'],
+  'ES-MX3000': ['X', 'O', 'XX', 'OX', 'XO', 'XXO', 'OXX', 'OXXO', 'OXO'],
+  'ES-PSD5030T DOOR': ['X', 'O', 'XX', 'OX', 'XO', 'XXO', 'OXX', 'OXXO', 'OXO'],
+  'ES-BF5010T': ['X', 'O', 'XX', 'OX', 'XO', 'XXO', 'OXX', 'OXXO', 'OXO'],
 };
 
 export const GLASS_COLORS = [
