@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { X } from "lucide-react";
-import { MR_GLASS_SERIES, ESW_PRODUCT_TYPES, SERIES_CONFIGS, SH_UNEQUAL_SERIES, WINDOW_OPTION_SERIES, DOOR_OPTION_SERIES } from "./constants";
+import { MR_GLASS_SERIES, ESW_PRODUCT_TYPES, SERIES_CONFIGS, SH_UNEQUAL_SERIES, WINDOW_OPTION_SERIES, DOOR_OPTION_SERIES, ESW_SLIDER_OPENINGS } from "./constants";
 
 export default function LineItem({ item, index, onChange, onRemove, manufacturer }) {
   const isESW = manufacturer === "ESW";
@@ -185,6 +185,23 @@ export default function LineItem({ item, index, onChange, onRemove, manufacturer
           >
             <option value="">Select config...</option>
             {configs.map(c => <option key={c} value={c}>{c}</option>)}
+          </select>
+        </div>
+      )}
+
+      {/* ESW Sliders Opening Direction */}
+      {isESW && productType === "Sliders" && item.series && (
+        <div className="mb-2.5">
+          <label className="block text-[11px] font-medium text-[#888880] uppercase tracking-wider mb-1.5">
+            Opening Direction <span className="text-[#e86c2f]">*</span>
+          </label>
+          <select
+            value={item.opening_direction || ""}
+            onChange={e => update("opening_direction", e.target.value)}
+            className="w-full bg-[#faf9f7] border-[1.5px] border-[#ddd] rounded-[10px] text-[#1a1a1a] font-sans text-[14px] py-3 px-3.5 pr-9 outline-none transition-all focus:border-[#e86c2f] focus:shadow-[0_0_0_3px_rgba(232,108,47,0.1)] appearance-none bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2712%27%20height%3D%278%27%20viewBox%3D%270%200%2012%208%27%3E%3Cpath%20d%3D%27M1%201l5%205%205-5%27%20stroke%3D%27%23e86c2f%27%20stroke-width%3D%271.5%27%20fill%3D%27none%27%20stroke-linecap%3D%27round%27/%3E%3C/svg%3E')] bg-no-repeat bg-[right_14px_center]"
+          >
+            <option value="">Select direction...</option>
+            {ESW_SLIDER_OPENINGS.map(d => <option key={d} value={d}>{d}</option>)}
           </select>
         </div>
       )}

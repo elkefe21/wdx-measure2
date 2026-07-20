@@ -91,6 +91,11 @@ export const FRAME_COLORS = [
 
 export const LOWE_COATINGS = ['NONE', 'CLIMA GUARD 62/27', 'SB70', 'SB60'];
 
+// ESW Sliding door opening directions
+export const ESW_SLIDER_OPENINGS = [
+  'XO', 'OX', 'XX', 'XXO', 'OXX', 'XXX', 'OX-XO', 'XXXX', 'OXX-XXO', 'XXX-XXX',
+];
+
 // Series that use OX Equal / OX Unequal (Oriel) config with sash height
 export const SH_UNEQUAL_SERIES = [
   'MG200 (SH)', 'MG350 (SH)',
