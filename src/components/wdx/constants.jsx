@@ -74,6 +74,14 @@ export const SERIES_CONFIGS = {
   'ES-1050WW': ['OX Equal', 'OX Unequal (Oriel)'],
   'ES-1150WW': ['OX Equal', 'OX Unequal (Oriel)'],
   'ES-EL100': ['OX Equal', 'OX Unequal (Oriel)'],
+  // ESW Horizontal Roller — mirrors MR Glass HR config
+  'ES-2000': ['XO', 'OX', 'XOX [1/3][1/3][1/3]', 'XOX [1/4][1/2][1/4]'],
+  'ES-2050': ['XO', 'OX', 'XOX [1/3][1/3][1/3]', 'XOX [1/4][1/2][1/4]'],
+  'ES-EL200': ['XO', 'OX', 'XOX [1/3][1/3][1/3]', 'XOX [1/4][1/2][1/4]'],
+  'ES-MX2000': ['XO', 'OX', 'XOX [1/3][1/3][1/3]', 'XOX [1/4][1/2][1/4]'],
+  'ES-SW340 LMI': ['XO', 'OX', 'XOX [1/3][1/3][1/3]', 'XOX [1/4][1/2][1/4]'],
+  'ES-V200 - HORIZONTAL ROLLER': ['XO', 'OX', 'XOX [1/3][1/3][1/3]', 'XOX [1/4][1/2][1/4]'],
+  'HR-2600 - LMI': ['XO', 'OX', 'XOX [1/3][1/3][1/3]', 'XOX [1/4][1/2][1/4]'],
 };
 
 export const GLASS_COLORS = [
@@ -108,6 +116,8 @@ export const WINDOW_OPTION_SERIES = [
   'MG350 (HR)', 'MG350 (SH)', 'MG350 (PW)',
   // ESW Single Hung
   '600T LMI', 'ES-1000', 'ES-1000WW', 'ES-1050', 'ES-1050WW', 'ES-1150WW', 'ES-EL100',
+  // ESW Horizontal Roller
+  'ES-2000', 'ES-2050', 'ES-EL200', 'ES-MX2000', 'ES-SW340 LMI', 'ES-V200 - HORIZONTAL ROLLER', 'HR-2600 - LMI',
 ];
 
 // Series that show door option checkboxes (Privacy + LH + RH)
