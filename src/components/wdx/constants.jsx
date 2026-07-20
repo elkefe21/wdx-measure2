@@ -123,6 +123,14 @@ export const WINDOW_OPTION_SERIES = [
   '600T LMI', 'ES-1000', 'ES-1000WW', 'ES-1050', 'ES-1050WW', 'ES-1150WW', 'ES-EL100',
   // ESW Horizontal Roller
   'ES-2000', 'ES-2050', 'ES-EL200', 'ES-MX2000', 'ES-SW340 LMI', 'ES-V200 - HORIZONTAL ROLLER', 'HR-2600 - LMI',
+  // ESW Casement
+  'ES-5000', 'ES-P252 LMI - CASEMENT', 'ES-V500 - CASEMENT', 'HC-200 LMI',
+  // ESW Fixed Window
+  'ES-1500', 'ES-8000 JUMBO', 'ES-8000T JUMBO', 'ES-EL150', 'ES-MX1500', 'ES-P252 LMI - FIXED WINDOW', 'ES-V150 - FIXED WINDOW',
+  // ESW Fixed Casement
+  'ES-5100',
+  // ESW Awning
+  'ES-5500', 'ES-5600', 'ES-P252 LMI AWNING', 'ES-V550 - AWNING', 'GW-2650 LMI',
 ];
 
 // Series that show door option checkboxes (Privacy + LH + RH)
