@@ -82,6 +82,11 @@ export const SERIES_CONFIGS = {
   'ES-SW340 LMI': ['XO', 'OX', 'XOX [1/3][1/3][1/3]', 'XOX [1/4][1/2][1/4]'],
   'ES-V200 - HORIZONTAL ROLLER': ['XO', 'OX', 'XOX [1/3][1/3][1/3]', 'XOX [1/4][1/2][1/4]'],
   'HR-2600 - LMI': ['XO', 'OX', 'XOX [1/3][1/3][1/3]', 'XOX [1/4][1/2][1/4]'],
+  // ESW Casement
+  'ES-5000': ['SINGLE', 'DOUBLE'],
+  'ES-P252 LMI - CASEMENT': ['SINGLE', 'DOUBLE'],
+  'ES-V500 - CASEMENT': ['SINGLE', 'DOUBLE'],
+  'HC-200 LMI': ['SINGLE', 'DOUBLE'],
 };
 
 export const GLASS_COLORS = [
