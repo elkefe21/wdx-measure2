@@ -93,7 +93,7 @@ export const LOWE_COATINGS = ['NONE', 'CLIMA GUARD 62/27', 'SB70', 'SB60'];
 
 // ESW Sliding door opening directions
 export const ESW_SLIDER_OPENINGS = [
-  'XO', 'OX', 'XX', 'XXO', 'OXX', 'XXX', 'OX-XO', 'XXXX', 'OXX-XXO', 'XXX-XXX',
+  'XO', 'OX', 'XX', 'XXO', 'OXX', 'XXX', 'OXXX', 'XXXO', 'OX-XO', 'XXXX', 'OXX-XXO', 'XXX-XXX',
 ];
 
 // Series that use OX Equal / OX Unequal (Oriel) config with sash height
