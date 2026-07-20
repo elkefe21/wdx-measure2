@@ -83,10 +83,10 @@ export const SERIES_CONFIGS = {
   'ES-V200 - HORIZONTAL ROLLER': ['XO', 'OX', 'XOX [1/3][1/3][1/3]', 'XOX [1/4][1/2][1/4]'],
   'HR-2600 - LMI': ['XO', 'OX', 'XOX [1/3][1/3][1/3]', 'XOX [1/4][1/2][1/4]'],
   // ESW Casement
-  'ES-5000': ['SINGLE', 'DOUBLE'],
-  'ES-P252 LMI - CASEMENT': ['SINGLE', 'DOUBLE'],
-  'ES-V500 - CASEMENT': ['SINGLE', 'DOUBLE'],
-  'HC-200 LMI': ['SINGLE', 'DOUBLE'],
+  'ES-5000': ['X - Multipoint', 'XX - Multipoint'],
+  'ES-P252 LMI - CASEMENT': ['X - Multipoint', 'XX - Multipoint'],
+  'ES-V500 - CASEMENT': ['X - Multipoint', 'XX - Multipoint'],
+  'HC-200 LMI': ['X - Multipoint', 'XX - Multipoint'],
 };
 
 export const GLASS_COLORS = [
