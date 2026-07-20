@@ -145,7 +145,10 @@ export default function LineItem({ item, index, onChange, onRemove, manufacturer
       {/* Window Options */}
       {item.config && WINDOW_OPTION_SERIES.includes(item.series) && (
         <div className="mb-2.5 flex gap-4">
-          {["Privacy", "Flush Adapter (no flange)"].map(opt => {
+          {(manufacturer === "ESW"
+            ? ["Privacy", "Equal Leg (no flange)"]
+            : ["Privacy", "Flush Adapter (no flange)"]
+          ).map(opt => {
             const key = `opt_${opt}`;
             return (
               <label key={opt} className="flex items-center gap-1.5 cursor-pointer select-none">

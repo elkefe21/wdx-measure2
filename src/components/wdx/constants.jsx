@@ -146,10 +146,12 @@ export const SH_UNEQUAL_SERIES = [
   '600T LMI', 'ES-1000', 'ES-1000WW', 'ES-1050', 'ES-1050WW', 'ES-1150WW', 'ES-EL100',
 ];
 
-// Series that show window option checkboxes (Privacy + Flush Adapter)
+// Series that show window option checkboxes (Privacy + Flush Adapter / Equal Leg)
 export const WINDOW_OPTION_SERIES = [
   'MG200 (SH)', 'MG300 (HR)', 'MG400 (PW)', 'MG450 (PW)', 'MG600 (CA)',
   'MG350 (HR)', 'MG350 (SH)', 'MG350 (PW)',
+  // ESW Single Hung
+  '600T LMI', 'ES-1000', 'ES-1000WW', 'ES-1050', 'ES-1050WW', 'ES-1150WW', 'ES-EL100',
 ];
 
 // Series that show door option checkboxes (Privacy + LH + RH)
