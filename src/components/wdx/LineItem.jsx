@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { X } from "lucide-react";
-import { MR_GLASS_SERIES, ESW_SERIES, SERIES_CONFIGS, WINDOW_OPTION_SERIES, DOOR_OPTION_SERIES } from "./constants";
+import { MR_GLASS_SERIES, ESW_SERIES, SERIES_CONFIGS, SH_UNEQUAL_SERIES, WINDOW_OPTION_SERIES, DOOR_OPTION_SERIES } from "./constants";
 
 export default function LineItem({ item, index, onChange, onRemove, manufacturer }) {
   const seriesList = manufacturer === "ESW" ? ESW_SERIES : MR_GLASS_SERIES;
@@ -128,7 +128,7 @@ export default function LineItem({ item, index, onChange, onRemove, manufacturer
       )}
 
       {/* Sash Height (SH unequal configs) */}
-      {item.config === "OX Unequal (Oriel)" && ["MG200 (SH)", "MG350 (SH)"].includes(item.series) && (
+      {item.config === "OX Unequal (Oriel)" && SH_UNEQUAL_SERIES.includes(item.series) && (
         <div className="mb-2.5">
           <label className="block text-[11px] font-medium text-[#e86c2f] uppercase tracking-wider mb-1.5">Sash Height (in)</label>
           <input

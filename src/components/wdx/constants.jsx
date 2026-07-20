@@ -115,6 +115,14 @@ export const SERIES_CONFIGS = {
   'MG500/MG5000 (SF)': ['FIXED'],
   'MG6000 (SF)': ['FIXED'],
   'MG5500 (SF/WW)': ['FIXED'],
+  // ESW Single Hung — OX Equal / OX Unequal (Oriel) system
+  '600T LMI': ['OX Equal', 'OX Unequal (Oriel)'],
+  'ES-1000': ['OX Equal', 'OX Unequal (Oriel)'],
+  'ES-1000WW': ['OX Equal', 'OX Unequal (Oriel)'],
+  'ES-1050': ['OX Equal', 'OX Unequal (Oriel)'],
+  'ES-1050WW': ['OX Equal', 'OX Unequal (Oriel)'],
+  'ES-1150WW': ['OX Equal', 'OX Unequal (Oriel)'],
+  'ES-EL100': ['OX Equal', 'OX Unequal (Oriel)'],
 };
 
 export const GLASS_COLORS = [
@@ -131,6 +139,12 @@ export const FRAME_COLORS = [
 ];
 
 export const LOWE_COATINGS = ['NONE', 'CLIMA GUARD 62/27', 'SB70', 'SB60'];
+
+// Series that use OX Equal / OX Unequal (Oriel) config with sash height
+export const SH_UNEQUAL_SERIES = [
+  'MG200 (SH)', 'MG350 (SH)',
+  '600T LMI', 'ES-1000', 'ES-1000WW', 'ES-1050', 'ES-1050WW', 'ES-1150WW', 'ES-EL100',
+];
 
 // Series that show window option checkboxes (Privacy + Flush Adapter)
 export const WINDOW_OPTION_SERIES = [
