@@ -127,6 +127,21 @@ export default function LineItem({ item, index, onChange, onRemove, manufacturer
         </div>
       )}
 
+      {/* Sash Height (SH unequal configs) */}
+      {item.config === "OX Unequal (Oriel)" && ["MG200 (SH)", "MG350 (SH)"].includes(item.series) && (
+        <div className="mb-2.5">
+          <label className="block text-[11px] font-medium text-[#e86c2f] uppercase tracking-wider mb-1.5">Sash Height (in)</label>
+          <input
+            type="number"
+            inputMode="decimal"
+            value={item.sash_height || ""}
+            onChange={e => update("sash_height", e.target.value)}
+            placeholder="0.00"
+            className="w-full bg-[rgba(232,108,47,0.04)] border-[1.5px] border-[rgba(232,108,47,0.3)] rounded-[10px] text-[#1a1a1a] font-mono text-[15px] py-3 px-3 outline-none transition-all focus:border-[#e86c2f] focus:shadow-[0_0_0_3px_rgba(232,108,47,0.1)] text-center"
+          />
+        </div>
+      )}
+
       {/* Window Options */}
       {item.config && WINDOW_OPTION_SERIES.includes(item.series) && (
         <div className="mb-2.5 flex gap-4">
