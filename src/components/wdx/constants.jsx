@@ -17,7 +17,7 @@ export const ESW_PRODUCT_TYPES = {
   Storefront: [
     'ES-7000', 'ES-7100', 'ES-7500', 'ES-7600', 'ES-8000 - STOREFRONT', 'ES-8000T LMI - STOREFRONT', 'ES-8860 LMI',
   ],
-  Mullion: [
+  Shape: [
     'ES-8000 SHAPE', 'ES-EL150 SHAPE', 'ES-MX1500 SHAPE', 'ES-V150 SHAPE - FIXED WINDOW',
   ],
 };
