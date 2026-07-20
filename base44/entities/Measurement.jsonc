@@ -1,0 +1,164 @@
+{
+  "name": "Measurement",
+  "type": "object",
+  "properties": {
+    "permitted": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ],
+      "description": "Is this job permitted?"
+    },
+    "tech_name": {
+      "type": "string",
+      "description": "Technician name"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Job date"
+    },
+    "client_name": {
+      "type": "string",
+      "description": "Client / homeowner name"
+    },
+    "client_phone": {
+      "type": "string",
+      "description": "Homeowner phone number"
+    },
+    "client_email": {
+      "type": "string",
+      "description": "Homeowner email address"
+    },
+    "address": {
+      "type": "string",
+      "description": "Job site address"
+    },
+    "city": {
+      "type": "string",
+      "description": "City"
+    },
+    "zip": {
+      "type": "string",
+      "description": "Zip code"
+    },
+    "glass_color": {
+      "type": "string",
+      "description": "Glass color"
+    },
+    "frame_color": {
+      "type": "string",
+      "description": "Frame color"
+    },
+    "lowe_coating": {
+      "type": "string",
+      "description": "Low-E coating"
+    },
+    "job_notes": {
+      "type": "string",
+      "description": "Special instructions"
+    },
+    "photos": {
+      "type": "array",
+      "description": "Site photo URLs",
+      "items": {
+        "type": "string"
+      }
+    },
+    "line_items": {
+      "type": "array",
+      "description": "Line items",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": "number"
+          },
+          "mark": {
+            "type": "string"
+          },
+          "series": {
+            "type": "string"
+          },
+          "config": {
+            "type": "string"
+          },
+          "width": {
+            "type": "string"
+          },
+          "height": {
+            "type": "string"
+          },
+          "qty": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "sqft": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "total_sqft": {
+      "type": "number",
+      "description": "Total square footage"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "submitted",
+        "in_review",
+        "completed"
+      ],
+      "default": "submitted"
+    }
+  },
+  "required": [
+    "client_name",
+    "tech_name"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

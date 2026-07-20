@@ -1,0 +1,83 @@
+{
+  "name": "Draft",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "Draft form data",
+      "properties": {
+        "permitted": {
+          "type": "string"
+        },
+        "techName": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "clientName": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        },
+        "glassColor": {
+          "type": "string"
+        },
+        "frameColor": {
+          "type": "string"
+        },
+        "loweCoating": {
+          "type": "string"
+        },
+        "jobNotes": {
+          "type": "string"
+        },
+        "totalSqft": {
+          "type": "number"
+        },
+        "lineItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "mark": {
+                "type": "string"
+              },
+              "series": {
+                "type": "string"
+              },
+              "config": {
+                "type": "string"
+              },
+              "width": {
+                "type": "string"
+              },
+              "height": {
+                "type": "string"
+              },
+              "qty": {
+                "type": "string"
+              },
+              "notes": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

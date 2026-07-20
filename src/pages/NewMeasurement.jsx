@@ -14,6 +14,8 @@ import PhotoUpload from "@/components/wdx/PhotoUpload";
 
 const emptyItem = () => ({ mark: "", series: "", config: "", width: "", height: "", qty: "1", notes: "" });
 
+const MANUFACTURERS = ["Mr. Glass", "ESW"];
+
 export default function NewMeasurement() {
   const navigate = useNavigate();
   const [draftId, setDraftId] = useState(null);
@@ -54,6 +56,7 @@ export default function NewMeasurement() {
     jobNotes: "",
   });
 
+  const [manufacturer, setManufacturer] = useState("Mr. Glass");
   const [lineItems, setLineItems] = useState([emptyItem(), emptyItem(), emptyItem()]);
   const [photos, setPhotos] = useState([]);
 
@@ -138,6 +141,7 @@ export default function NewMeasurement() {
       loweCoating: d.loweCoating || "NONE",
       jobNotes: d.jobNotes || "",
     });
+    if (d.manufacturer) setManufacturer(d.manufacturer);
     setPhotos(d.photos || []);
     if (d.lineItems?.length > 0) {
       setLineItems(d.lineItems.map(i => ({
@@ -174,7 +178,7 @@ export default function NewMeasurement() {
   }, [form, lineItems, draftId]);
 
   const saveDraft = async () => {
-    const data = { ...form, lineItems, photos, totalSqft };
+    const data = { ...form, manufacturer, lineItems, photos, totalSqft };
     if (draftId) {
       await base44.entities.Draft.update(draftId, { data });
     } else {
@@ -428,6 +432,32 @@ export default function NewMeasurement() {
 
       {/* Line Items */}
       <SectionCard title="Line Items">
+        {/* Manufacturer Tabs */}
+        <div className="mb-4">
+          <div className="text-[11px] font-medium text-[#888880] uppercase tracking-wider mb-2">Manufacturer Selection</div>
+          <div className="flex gap-2">
+            {MANUFACTURERS.map(m => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => {
+                  if (m !== manufacturer) {
+                    setManufacturer(m);
+                    setLineItems(prev => prev.map(item => ({ ...item, series: "", config: "" })));
+                  }
+                }}
+                className={`flex-1 py-2.5 rounded-[10px] border text-[13px] font-syne font-bold cursor-pointer transition-all ${
+                  manufacturer === m
+                    ? "bg-[#e86c2f] border-[#e86c2f] text-white shadow-[0_2px_8px_rgba(232,108,47,0.3)]"
+                    : "bg-[#faf9f7] border-[#ddd] text-[#888880] hover:border-[#e86c2f] hover:text-[#e86c2f]"
+                }`}
+              >
+                {m}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="flex items-center justify-between mb-3">
           <span className="font-mono text-[12px] text-[#888880] bg-[rgba(232,108,47,0.1)] border border-[rgba(232,108,47,0.25)] px-2.5 py-1 rounded-full">
             {lineItems.length} item{lineItems.length !== 1 ? "s" : ""}
@@ -441,6 +471,7 @@ export default function NewMeasurement() {
             index={idx}
             onChange={updateLineItem}
             onRemove={removeLineItem}
+            manufacturer={manufacturer}
           />
         ))}
 
