@@ -145,4 +145,7 @@ export const WINDOW_OPTION_SERIES = [
 // Series that show door option checkboxes (Privacy + LH + RH)
 export const DOOR_OPTION_SERIES = [
   'MG3000 (FD)', 'MG3500 (FD)', 'MG4000 (Pivot Door)',
+  // ESW Doors
+  'ES-3001', 'ES-9000 - INSWING DOOR', 'ES-9000', 'ES-9100', 'ES-EL300',
+  'ES-MX3000', 'ES-PSD5030T DOOR', 'ES-BF5010T',
 ];
