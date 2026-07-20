@@ -5,8 +5,13 @@ import { MR_GLASS_SERIES, ESW_PRODUCT_TYPES, SERIES_CONFIGS, SH_UNEQUAL_SERIES, 
 export default function LineItem({ item, index, onChange, onRemove, manufacturer }) {
   const isESW = manufacturer === "ESW";
   // Derive product type from item (or from existing series when loading a draft)
+  const seriesInType = (pt, series) => {
+    const list = ESW_PRODUCT_TYPES[pt];
+    if (!list) return false;
+    return list.some(e => (typeof e === 'object' ? e.items.includes(series) : e === series));
+  };
   const productType = item.productType || (item.series && isESW
-    ? Object.keys(ESW_PRODUCT_TYPES).find(pt => ESW_PRODUCT_TYPES[pt].includes(item.series)) || ""
+    ? Object.keys(ESW_PRODUCT_TYPES).find(pt => seriesInType(pt, item.series)) || ""
     : "");
   const seriesList = isESW
     ? (ESW_PRODUCT_TYPES[productType] || [])
@@ -115,9 +120,16 @@ export default function LineItem({ item, index, onChange, onRemove, manufacturer
             className="w-full bg-[#faf9f7] border-[1.5px] border-[#ddd] rounded-[10px] text-[#1a1a1a] font-sans text-[14px] py-3 px-3.5 pr-9 outline-none transition-all focus:border-[#e86c2f] focus:shadow-[0_0_0_3px_rgba(232,108,47,0.1)] appearance-none bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2712%27%20height%3D%278%27%20viewBox%3D%270%200%2012%208%27%3E%3Cpath%20d%3D%27M1%201l5%205%205-5%27%20stroke%3D%27%23e86c2f%27%20stroke-width%3D%271.5%27%20fill%3D%27none%27%20stroke-linecap%3D%27round%27/%3E%3C/svg%3E')] bg-no-repeat bg-[right_14px_center] disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <option value="">{productType ? "Select series..." : "Select product type first..."}</option>
-            {seriesList.map(s => (
-              <option key={s} value={s}>{s}</option>
-            ))}
+            {seriesList.map((entry, i) => {
+              if (typeof entry === 'object' && entry.group) {
+                return (
+                  <optgroup key={i} label={entry.group}>
+                    {entry.items.map(s => <option key={s} value={s}>{s}</option>)}
+                  </optgroup>
+                );
+              }
+              return <option key={entry} value={entry}>{entry}</option>;
+            })}
           </select>
         </div>
       )}
