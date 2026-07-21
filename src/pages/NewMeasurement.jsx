@@ -88,6 +88,7 @@ export default function NewMeasurement() {
     const measurement = await base44.entities.Measurement.get(id);
     if (!measurement) return;
     setEditId(id);
+    if (measurement.manufacturer) setManufacturer(measurement.manufacturer);
     setForm({
       permitted: measurement.permitted || "",
       techName: measurement.tech_name || "",
@@ -108,6 +109,7 @@ export default function NewMeasurement() {
     if (measurement.line_items?.length > 0) {
       setLineItems(measurement.line_items.map(i => ({
         mark: i.mark || "",
+        productType: i.productType || "",
         series: i.series || "",
         config: i.config || "",
         width: i.width || "",
@@ -249,6 +251,7 @@ export default function NewMeasurement() {
       // Save as submission (create or update)
       const measurementData = {
         permitted: form.permitted,
+        manufacturer,
         tech_name: form.techName,
         date: form.date,
         client_name: form.clientName,

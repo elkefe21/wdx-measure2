@@ -10,6 +10,14 @@
       ],
       "description": "Is this job permitted?"
     },
+    "manufacturer": {
+      "type": "string",
+      "enum": [
+        "Mr. Glass",
+        "ESW"
+      ],
+      "description": "Product manufacturer"
+    },
     "tech_name": {
       "type": "string",
       "description": "Technician name"
@@ -76,6 +84,9 @@
             "type": "number"
           },
           "mark": {
+            "type": "string"
+          },
+          "productType": {
             "type": "string"
           },
           "series": {
