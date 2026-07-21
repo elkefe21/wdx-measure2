@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
-import { X } from "lucide-react";
+import { X, Copy } from "lucide-react";
 import { MR_GLASS_SERIES, ESW_PRODUCT_TYPES, SERIES_CONFIGS, SH_UNEQUAL_SERIES, WINDOW_OPTION_SERIES, DOOR_OPTION_SERIES, ESW_SLIDER_OPENINGS } from "./constants";
 
-export default function LineItem({ item, index, onChange, onRemove, manufacturer }) {
+export default function LineItem({ item, index, onChange, onRemove, onCopy, manufacturer }) {
   const isESW = manufacturer === "ESW";
   // Derive product type from item (or from existing series when loading a draft)
   const seriesInType = (pt, series) => {
@@ -37,13 +37,23 @@ export default function LineItem({ item, index, onChange, onRemove, manufacturer
         <span className="font-mono text-[11px] text-[#e8a020]">
           {sqft > 0 ? sqft.toFixed(2) + " ft²" : "—"}
         </span>
-        <button
-          type="button"
-          onClick={() => onRemove(index)}
-          className="w-7 h-7 flex items-center justify-center rounded-lg bg-[rgba(255,77,109,0.1)] border border-[rgba(255,77,109,0.3)] text-[#dc3545] cursor-pointer transition-all hover:bg-[rgba(255,77,109,0.2)]"
-        >
-          <X className="w-3.5 h-3.5" />
-        </button>
+        <div className="flex items-center gap-1.5">
+          <button
+            type="button"
+            onClick={() => onCopy(index)}
+            title="Copy line item"
+            className="w-7 h-7 flex items-center justify-center rounded-lg bg-[rgba(232,108,47,0.1)] border border-[rgba(232,108,47,0.3)] text-[#e86c2f] cursor-pointer transition-all hover:bg-[rgba(232,108,47,0.2)]"
+          >
+            <Copy className="w-3.5 h-3.5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => onRemove(index)}
+            className="w-7 h-7 flex items-center justify-center rounded-lg bg-[rgba(255,77,109,0.1)] border border-[rgba(255,77,109,0.3)] text-[#dc3545] cursor-pointer transition-all hover:bg-[rgba(255,77,109,0.2)]"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </div>
 
       {/* Mark + Product Type/Series */}

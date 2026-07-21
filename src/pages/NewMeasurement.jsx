@@ -205,6 +205,15 @@ export default function NewMeasurement() {
     setLineItems(prev => [...prev, emptyItem()]);
   };
 
+  const copyLineItem = (index) => {
+    setLineItems(prev => {
+      const copy = { ...prev[index], mark: "" };
+      const next = [...prev];
+      next.splice(index + 1, 0, copy);
+      return next;
+    });
+  };
+
   const validate = () => {
     if (!form.permitted) return "Please select if job is permitted";
     if (!form.techName.trim()) return "Technician name is required";
@@ -475,6 +484,7 @@ export default function NewMeasurement() {
             index={idx}
             onChange={updateLineItem}
             onRemove={removeLineItem}
+            onCopy={copyLineItem}
             manufacturer={manufacturer}
           />
         ))}
