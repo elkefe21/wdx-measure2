@@ -11,6 +11,7 @@ import ToggleGroup from "@/components/wdx/ToggleGroup";
 import LineItem from "@/components/wdx/LineItem";
 import { GLASS_COLORS, FRAME_COLORS, LOWE_COATINGS } from "@/components/wdx/constants";
 import PhotoUpload from "@/components/wdx/PhotoUpload";
+import ConfirmModal from "@/components/wdx/ConfirmModal";
 
 const emptyItem = () => ({ mark: "", series: "", config: "", width: "", height: "", qty: "1", notes: "" });
 
@@ -24,6 +25,7 @@ export default function NewMeasurement() {
   const [submitted, setSubmitted] = useState(null);
   const [validationError, setValidationError] = useState(null);
   const [needsName, setNeedsName] = useState(false);
+  const [deleteIndex, setDeleteIndex] = useState(null);
   const saveTimerRef = useRef(null);
   const [user, setUser] = useState(null);
 
@@ -198,7 +200,12 @@ export default function NewMeasurement() {
   };
 
   const removeLineItem = (index) => {
-    setLineItems(prev => prev.filter((_, i) => i !== index));
+    setDeleteIndex(index);
+  };
+
+  const confirmDelete = () => {
+    setLineItems(prev => prev.filter((_, i) => i !== deleteIndex));
+    setDeleteIndex(null);
   };
 
   const addLineItem = () => {
@@ -561,6 +568,20 @@ export default function NewMeasurement() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Delete line item confirmation */}
+      {deleteIndex !== null && (
+        <ConfirmModal
+          emoji="🗑️"
+          title="Delete line item?"
+          message="This will remove the line item and all its data. This cannot be undone."
+          confirmLabel="Yes, delete"
+          cancelLabel="No, keep it"
+          destructive
+          onConfirm={confirmDelete}
+          onCancel={() => setDeleteIndex(null)}
+        />
       )}
 
       {/* Sending overlay */}
