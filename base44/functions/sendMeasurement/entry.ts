@@ -32,10 +32,11 @@ Deno.serve(async (req) => {
       ['Job Notes', jobInfo.jobNotes || ''],
       ['Total SqFt', totalSqft],
       [],
-      ['#', 'Mark', 'Series', 'Config', 'Width (in)', 'Height (in)', 'Qty', 'SqFt', 'Privacy', adapterLabel, 'LH', 'RH', 'Notes'],
+      ['#', 'Mark', 'Product Type', 'Series', 'Config', 'Width (in)', 'Height (in)', 'Qty', 'SqFt', 'Privacy', adapterLabel, 'LH', 'RH', 'Notes'],
       ...lineItems.map(i => [
         i.item,
         i.mark || '',
+        i.productType || '',
         i.series || '',
         i.config || '',
         i.width || '',
