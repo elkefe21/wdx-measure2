@@ -110,6 +110,10 @@ Deno.serve(async (req) => {
     const MONDAY_API_KEY = Deno.env.get('MONDAY_API_KEY');
     const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
 
+    const isESW = jobInfo.manufacturer === 'ESW';
+    const adapterKey = isESW ? 'opt_Equal Leg (no flange)' : 'opt_Flush Adapter (no flange)';
+    const adapterLabel = isESW ? 'Equal Leg' : 'Flush Adapter';
+
     // ── 1. Find or create client ──────────────────────────────────────────────
     let clientId = null;
     const existingClient = await findClientByName(jobInfo.clientName, MONDAY_API_KEY);
@@ -151,12 +155,12 @@ Deno.serve(async (req) => {
       ['Job Notes', jobInfo.jobNotes || ''],
       ['Total SqFt', totalSqft],
       [],
-      ['#', 'Mark', 'Series', 'Config', 'Width (in)', 'Height (in)', 'Qty', 'SqFt', 'Privacy', 'Flush Adapter', 'LH', 'RH', 'Notes'],
+      ['#', 'Mark', 'Series', 'Config', 'Width (in)', 'Height (in)', 'Qty', 'SqFt', 'Privacy', adapterLabel, 'LH', 'RH', 'Notes'],
       ...lineItems.map(i => [
         i.item, i.mark || '', i.series || '', i.config || '',
         i.width || '', i.height || '', i.qty || '', i.sqft || '',
         i['opt_Privacy'] ? 'Yes' : '',
-        i['opt_Flush Adapter (no flange)'] ? 'Yes' : '',
+        i[adapterKey] ? 'Yes' : '',
         i['opt_LH'] ? 'Yes' : '',
         i['opt_RH'] ? 'Yes' : '',
         i.notes || '',
@@ -169,7 +173,7 @@ Deno.serve(async (req) => {
 
     const optionKeys = [
       { key: 'opt_Privacy', label: 'Privacy' },
-      { key: 'opt_Flush Adapter (no flange)', label: 'Flush Adapter' },
+      { key: adapterKey, label: adapterLabel },
       { key: 'opt_LH', label: 'LH' },
       { key: 'opt_RH', label: 'RH' },
     ];

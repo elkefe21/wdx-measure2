@@ -10,6 +10,10 @@ Deno.serve(async (req) => {
 
     const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
 
+    const isESW = jobInfo.manufacturer === 'ESW';
+    const adapterKey = isESW ? 'opt_Equal Leg (no flange)' : 'opt_Flush Adapter (no flange)';
+    const adapterLabel = isESW ? 'Equal Leg' : 'Flush Adapter';
+
     // ── Generate CSV ──────────────────────────────────────────────────────────
     const csvRows = [
       ['WDX Window & Door Measure Form'],
@@ -28,7 +32,7 @@ Deno.serve(async (req) => {
       ['Job Notes', jobInfo.jobNotes || ''],
       ['Total SqFt', totalSqft],
       [],
-      ['#', 'Mark', 'Series', 'Config', 'Width (in)', 'Height (in)', 'Qty', 'SqFt', 'Privacy', 'Flush Adapter', 'LH', 'RH', 'Notes'],
+      ['#', 'Mark', 'Series', 'Config', 'Width (in)', 'Height (in)', 'Qty', 'SqFt', 'Privacy', adapterLabel, 'LH', 'RH', 'Notes'],
       ...lineItems.map(i => [
         i.item,
         i.mark || '',
@@ -39,7 +43,7 @@ Deno.serve(async (req) => {
         i.qty || '',
         i.sqft || '',
         i['opt_Privacy'] ? 'Yes' : '',
-        i['opt_Flush Adapter (no flange)'] ? 'Yes' : '',
+        i[adapterKey] ? 'Yes' : '',
         i['opt_LH'] ? 'Yes' : '',
         i['opt_RH'] ? 'Yes' : '',
         i.notes || '',
@@ -55,7 +59,7 @@ Deno.serve(async (req) => {
     const itemRows = lineItems.map((i, idx) => {
       const optionKeys = [
         { key: 'opt_Privacy', label: 'Privacy' },
-        { key: 'opt_Flush Adapter (no flange)', label: 'Flush Adapter' },
+        { key: adapterKey, label: adapterLabel },
         { key: 'opt_LH', label: 'LH' },
         { key: 'opt_RH', label: 'RH' },
       ];

@@ -280,6 +280,7 @@ export default function NewMeasurement() {
       // Send email + create Monday.com entries (non-blocking — success screen shows regardless)
       base44.functions.invoke('onMeasurementSubmitted', {
         jobInfo: {
+          manufacturer,
           clientName: form.clientName,
           address: form.address,
           city: form.city,
