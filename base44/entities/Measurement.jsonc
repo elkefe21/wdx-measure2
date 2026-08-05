@@ -137,6 +137,17 @@
       "default": "quoted",
       "description": "CRM pipeline status"
     },
+    "quote_amount": {
+      "type": "number",
+      "description": "Manual quote dollar amount"
+    },
+    "contract_files": {
+      "type": "array",
+      "description": "Uploaded contract / file URLs",
+      "items": {
+        "type": "string"
+      }
+    },
     "followup_count": {
       "type": "number",
       "default": 0,

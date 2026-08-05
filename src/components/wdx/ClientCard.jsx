@@ -1,5 +1,6 @@
-import React from "react";
-import { MapPin, Calendar, Ruler, Clock, Bell } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { MapPin, Calendar, Ruler, Clock, Bell, DollarSign } from "lucide-react";
+import ContractFiles from "@/components/wdx/ContractFiles";
 
 const STATUS_CONFIG = {
   quoted:    { label: "Pending",   color: "#e8a020", bg: "rgba(232,160,32,0.12)",  border: "rgba(232,160,32,0.3)" },
@@ -14,10 +15,18 @@ const ACTION_BUTTONS = [
   { status: "declined",  label: "Declined",  color: "#dc3545" },
 ];
 
-export default function ClientCard({ measurement, onStatusChange, onRecurringToggle }) {
+export default function ClientCard({ measurement, isAdmin, onStatusChange, onRecurringToggle, onQuoteChange, onFileUpload, onFileDelete }) {
   const m = measurement;
   const status = m.crm_status || "quoted";
   const config = STATUS_CONFIG[status];
+
+  const [quote, setQuote] = useState(m.quote_amount?.toString() || "");
+  useEffect(() => { setQuote(m.quote_amount?.toString() || ""); }, [m.quote_amount]);
+
+  const handleQuoteBlur = () => {
+    const num = parseFloat(quote);
+    if ((num || null) !== (m.quote_amount || null)) onQuoteChange(m.id, num || null);
+  };
 
   const formatDate = (d) =>
     d ? new Date(d + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "—";
@@ -118,6 +127,27 @@ export default function ClientCard({ measurement, onStatusChange, onRecurringTog
           Keep reminding every 15 days
         </label>
       )}
+
+      {/* Quote amount */}
+      <div className="flex items-center gap-2 mt-3 pt-3 border-t border-[#f0ede8]">
+        <DollarSign className="w-4 h-4 text-[#888880] shrink-0" />
+        <input
+          type="number"
+          value={quote}
+          onChange={e => setQuote(e.target.value)}
+          onBlur={handleQuoteBlur}
+          placeholder="Enter quote amount"
+          className="flex-1 bg-[#faf9f7] border border-[#e8e4de] rounded-lg px-2.5 py-1.5 text-[13px] text-[#1a1a1a] outline-none focus:border-[#e86c2f] focus:shadow-[0_0_0_2px_rgba(232,108,47,0.1)] transition-all"
+        />
+      </div>
+
+      {/* Contract files */}
+      <ContractFiles
+        files={m.contract_files || []}
+        isAdmin={isAdmin}
+        onUpload={(file) => onFileUpload(m.id, file)}
+        onDelete={(url) => onFileDelete(m.id, url)}
+      />
     </div>
   );
 }

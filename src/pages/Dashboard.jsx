@@ -4,6 +4,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Search, BarChart3 } from "lucide-react";
 import StatCard from "@/components/wdx/StatCard";
 import ClientCard from "@/components/wdx/ClientCard";
+import MonthlyChart from "@/components/wdx/MonthlyChart";
 
 const STATUS_FILTERS = [
   { key: "all",       label: "All" },
@@ -77,6 +78,28 @@ export default function Dashboard() {
     queryClient.invalidateQueries({ queryKey: ["crm-measurements"] });
   };
 
+  const handleQuoteChange = async (id, amount) => {
+    await base44.entities.Measurement.update(id, { quote_amount: amount || null });
+    queryClient.invalidateQueries({ queryKey: ["crm-measurements"] });
+  };
+
+  const handleFileUpload = async (id, file) => {
+    const { file_url } = await base44.integrations.Core.UploadFile({ file });
+    const m = measurements.find(x => x.id === id);
+    const files = [...(m.contract_files || []), file_url];
+    await base44.entities.Measurement.update(id, { contract_files: files });
+    queryClient.invalidateQueries({ queryKey: ["crm-measurements"] });
+  };
+
+  const handleFileDelete = async (id, fileUrl) => {
+    const m = measurements.find(x => x.id === id);
+    const files = (m.contract_files || []).filter(f => f !== fileUrl);
+    await base44.entities.Measurement.update(id, { contract_files: files });
+    queryClient.invalidateQueries({ queryKey: ["crm-measurements"] });
+  };
+
+  const isAdmin = user?.role === "admin";
+
   return (
     <div>
       <div className="flex items-center gap-2 mb-1">
@@ -96,6 +119,9 @@ export default function Dashboard() {
         <StatCard label="Declined" value={stats.declined} color="#dc3545" />
         <StatCard label="Win Rate" value={`${winRate}%`} color="#e86c2f" />
       </div>
+
+      {/* Monthly chart */}
+      <MonthlyChart measurements={measurements} />
 
       {/* Search */}
       <div className="relative mb-4">
@@ -155,8 +181,12 @@ export default function Dashboard() {
             <ClientCard
               key={m.id}
               measurement={m}
+              isAdmin={isAdmin}
               onStatusChange={handleStatusChange}
               onRecurringToggle={handleRecurringToggle}
+              onQuoteChange={handleQuoteChange}
+              onFileUpload={handleFileUpload}
+              onFileDelete={handleFileDelete}
             />
           ))}
         </div>
