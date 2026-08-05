@@ -288,6 +288,11 @@ export default function NewMeasurement() {
       if (editId) {
         await base44.entities.Measurement.update(editId, measurementData);
       } else {
+        // Start CRM follow-up schedule: first reminder in 7 days
+        const firstFollowup = new Date(Date.now() + 7 * 86400000).toISOString().split("T")[0];
+        measurementData.crm_status = "quoted";
+        measurementData.followup_count = 0;
+        measurementData.next_followup_date = firstFollowup;
         await base44.entities.Measurement.create(measurementData);
       }
 

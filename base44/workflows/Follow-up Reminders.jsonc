@@ -1,0 +1,44 @@
+{
+  "description": "Daily check for due client follow-ups \u2014 sends reminder emails to field techs at 7, 15, 30 days, then optionally every 15 days",
+  "name": "Follow-up Reminders",
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "followup_reminders",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "process_followups": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "processFollowups"
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Process due follow-ups",
+            "description": "Send reminders & schedule next"
+          }
+        }
+      }
+    ]
+  },
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "0 8 * * *",
+      "one_time_date": null,
+      "timezone": "America/New_York",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  }
+}

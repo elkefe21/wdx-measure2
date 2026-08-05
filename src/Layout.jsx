@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { base44 } from "@/api/base44Client";
-import { Home, Ruler, LogOut, Menu, X } from "lucide-react";
+import { Home, Ruler, LogOut, Menu, X, LayoutDashboard } from "lucide-react";
 
 export default function Layout({ children, currentPageName }) {
   const [user, setUser] = useState(null);
@@ -49,6 +49,7 @@ export default function Layout({ children, currentPageName }) {
 
   const navItems = [
     { name: "Home", icon: Home, page: "Home" },
+    { name: "Dashboard", icon: LayoutDashboard, page: "Dashboard" },
     { name: "New Measurement", icon: Ruler, page: "NewMeasurement" },
   ];
 

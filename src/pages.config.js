@@ -49,11 +49,13 @@
  */
 import Home from './pages/Home';
 import NewMeasurement from './pages/NewMeasurement';
+import Dashboard from './pages/Dashboard';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
     "Home": Home,
+    "Dashboard": Dashboard,
     "NewMeasurement": NewMeasurement,
 }
 

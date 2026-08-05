@@ -125,6 +125,32 @@
         "completed"
       ],
       "default": "submitted"
+    },
+    "crm_status": {
+      "type": "string",
+      "enum": [
+        "quoted",
+        "responded",
+        "accepted",
+        "declined"
+      ],
+      "default": "quoted",
+      "description": "CRM pipeline status"
+    },
+    "followup_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of follow-up reminders sent"
+    },
+    "next_followup_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Next scheduled follow-up date"
+    },
+    "recurring_followup": {
+      "type": "boolean",
+      "default": false,
+      "description": "Continue 15-day reminders after initial 3 follow-ups"
     }
   },
   "required": [
